@@ -1,0 +1,15 @@
+version: '2'
+ 
+services:
+  postgres:
+    image: circleci/postgres:10.6-alpine-postgis
+    restart: always
+    container_name: isolation-postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_PASSWORD: ""
+      POSTGRES_USER: postgres
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - /storage/docker/postgres-isolation-datadir:/var/lib/postgresql/data

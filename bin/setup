@@ -23,6 +23,9 @@ FileUtils.chdir APP_ROOT do
   # end
 
   puts "\n== Preparing database =="
+  # Create a local data directory for Postgres on Docker
+  system! 'mkdir ./db/postgres'
+  system! 'docker-compose up -d'
   system! 'bin/rails db:prepare'
 
   puts "\n== Removing old logs and tempfiles =="
