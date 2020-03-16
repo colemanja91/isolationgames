@@ -10,7 +10,7 @@ development:
 
 test:
   <<: *defaults
-  url: "postgresql://postgres:@localhost:5432/isolationgames_test"
+  url: "postgresql://postgres@localhost:5434/isolationgames_test"
   pool: 5
 
 auroradefaults: &auroradefaults
