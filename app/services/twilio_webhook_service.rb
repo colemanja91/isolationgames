@@ -6,14 +6,22 @@ class TwilioWebhookService
   end
 
   def initialize(params)
+    puts params
+
     @notification = Notification.create!(
-      phone_number: params['From'],
-      message_body: params['Body'].downcase,
+      phone_number: params[:From],
+      message_body: params[:Body].downcase,
+      sms_message_sid: params[:SmsMessageSid],
+      message_sid: params[:MessageSid],
+      account_sid: params[:AccountSid],
+      from_zip: params[:FromZip],
+      from_state: params[:FromState],
+      from_country: params[:FromCountry],
+      from_city: params[:FromCity],
       direction: :inbound
     )
   end
 
-  def route
-    NotificationProcessorJob.perform_async(@notification.id)
+  def process
   end
 end

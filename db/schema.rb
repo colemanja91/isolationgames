@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_14_024147) do
+ActiveRecord::Schema.define(version: 2020_03_16_210429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 2020_03_14_024147) do
     t.string "message_body", null: false
     t.integer "direction", null: false
     t.string "media_url"
+    t.string "sms_message_sid", null: false
+    t.string "message_sid", null: false
+    t.string "account_sid", null: false
+    t.string "from_state"
+    t.string "from_city"
+    t.string "from_country"
+    t.string "from_zip"
   end
 
   create_table "user_cards", force: :cascade do |t|
