@@ -1,20 +1,28 @@
 # frozen_string_literal: true
 
 class TwilioWebhookService
-  attr_reader :params, :notification
-  def self.process(params)
-    new(params).process
-  end
+  attr_reader :params
 
   def initialize(params)
     @params = params
+  end
 
-    user.update!(
+  def process
+    notification
+  end
+
+  private
+
+  def user
+    @user ||= User.find_or_create_by!(
+      phone_number: params[:From],
       zipcode: params[:FromZip],
       country: params[:FromCountry]
     )
+  end
 
-    @notification = Notification.create!(
+  def notification
+    @notification ||= Notification.create!(
       user: user,
       phone_number: params[:From],
       message_body: params[:Body].downcase,
@@ -26,17 +34,6 @@ class TwilioWebhookService
       from_country: params[:FromCountry],
       from_city: params[:FromCity],
       direction: :inbound
-    )
-  end
-
-  def process
-  end
-
-  private
-
-  def user
-    @user ||= User.find_or_create_by!(
-      phone_number: params[:From]
     )
   end
 end
