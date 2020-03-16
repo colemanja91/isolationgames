@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   has_many :game_card_sets
   has_many :user_games
   has_many :game_rounds
-  has_one :user
+  belongs_to :user
 
   MIN_PLAYERS = 4
   MAX_PLAYERS = 8
@@ -36,6 +36,6 @@ class Game < ApplicationRecord
       # Tell them the game is full :(
     end
 
-    user_games.create!(user: user).join!
+    user_games.create!(user: user)
   end
 end

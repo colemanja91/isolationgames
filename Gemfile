@@ -8,10 +8,11 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'aasm'
 gem 'activerecord-postgis-adapter'
 gem 'aws-sdk-s3'
-gem 'aws-sdk-sns'
+gem 'aws-sdk-sqs'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
+gem 'shoryuken'
 gem 'twilio-ruby'
 
 # Reduces boot times through caching; required in config/boot.rb

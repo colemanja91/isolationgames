@@ -71,12 +71,10 @@ ActiveRecord::Schema.define(version: 2020_03_14_024147) do
   create_table "notifications", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
+    t.string "phone_number", null: false
     t.string "message_body", null: false
-    t.integer "message_type", null: false
-    t.integer "directionality", null: false
+    t.integer "direction", null: false
     t.string "media_url"
-    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "user_cards", force: :cascade do |t|
@@ -123,7 +121,6 @@ ActiveRecord::Schema.define(version: 2020_03_14_024147) do
   add_foreign_key "game_rounds", "user_cards"
   add_foreign_key "game_rounds", "users"
   add_foreign_key "games", "users"
-  add_foreign_key "notifications", "users"
   add_foreign_key "user_cards", "user_games"
   add_foreign_key "user_cards", "white_cards"
   add_foreign_key "user_games", "games"
