@@ -2,7 +2,7 @@
 
 class TwilioWebhooksController < ApplicationController
   def webhook_receiver
-    TwilioWebhookService.process(params)
+    TwilioWebhookService.new(params).process
     render json: {}, status: :ok and return
   end
 end
