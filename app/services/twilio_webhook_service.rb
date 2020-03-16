@@ -8,11 +8,6 @@ class TwilioWebhookService
   end
 
   def process
-    user.update!(
-      zipcode: params[:FromZip],
-      country: params[:FromCountry]
-    )
-
     notification
   end
 
@@ -20,7 +15,9 @@ class TwilioWebhookService
 
   def user
     @user ||= User.find_or_create_by!(
-      phone_number: params[:From]
+      phone_number: params[:From],
+      zipcode: params[:FromZip],
+      country: params[:FromCountry]
     )
   end
 
