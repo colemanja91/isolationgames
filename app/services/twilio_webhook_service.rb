@@ -8,7 +8,7 @@ class TwilioWebhookService
   end
 
   def process
-    notification
+    NotificationProcessorJob.perform_async(notification.id)
   end
 
   private

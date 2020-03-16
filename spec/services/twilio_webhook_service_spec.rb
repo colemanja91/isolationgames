@@ -26,24 +26,20 @@ RSpec.describe TwilioWebhookService do
       }
     end
 
-    context "user" do
-      it "creates a new user" do
-        expect {
-          TwilioWebhookService.new(default_params).process
-        }.to change {
-          User.count
-        }.by(1)
-      end
+    it "creates a new user" do
+      expect {
+        TwilioWebhookService.new(default_params).process
+      }.to change {
+        User.count
+      }.by(1)
     end
 
-    context "notification" do
-      it "creates a new notification" do
-        expect {
-          TwilioWebhookService.new(default_params).process
-        }.to change {
-          Notification.count
-        }.by(1)
-      end
+    it "creates a new notification" do
+      expect {
+        TwilioWebhookService.new(default_params).process
+      }.to change {
+        Notification.count
+      }.by(1)
     end
   end
 end
