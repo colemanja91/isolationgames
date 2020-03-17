@@ -9,7 +9,7 @@ class TwilioService
 
   def send(message)
     message = client.messages.create(
-      from: ,
+      from: "badnumber",
       to: user.phone_number,
       body: message
     )
