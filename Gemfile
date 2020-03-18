@@ -9,6 +9,7 @@ gem 'aasm'
 gem 'activerecord-postgis-adapter'
 gem 'aws-sdk-s3'
 gem 'aws-sdk-sqs'
+gem 'graphql'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
@@ -38,3 +39,5 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'rspec-deep-ignore-order-matcher'
 end
+
+gem 'graphiql-rails', group: :development
