@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
 class Game < ApplicationRecord
+  include AASM
   has_many :game_card_sets
   has_many :user_games
   has_many :game_rounds
   belongs_to :user
 
+  before_validation :set_name, on: :create
+
+  validates :user, presence: true
+  validates :name, presence: true, uniqueness: true
+
   MIN_PLAYERS = 4
-  MAX_PLAYERS = 8
+  MAX_PLAYERS = 10
 
   enum status: {
     created: 0,
@@ -15,9 +21,7 @@ class Game < ApplicationRecord
     ended: 20
   }
 
-  aasm column: :state, enum: true, whiny_persistance: true do
-    after_all_transitions :on_all_transitions
-
+  aasm column: :status, enum: true, whiny_persistance: true do
     state :created, initial: true
     state :started
     state :ended
@@ -31,11 +35,13 @@ class Game < ApplicationRecord
     end
   end
 
-  def add_user(user)
-    if user_games.joined.count >= MAX_PLAYERS
-      # Tell them the game is full :(
-    end
+  def started_by_display_name
+    user.name
+  end
 
-    user_games.create!(user: user)
+  private
+
+  def set_name
+    self.name = Haikunator.haikunate(0)
   end
 end
