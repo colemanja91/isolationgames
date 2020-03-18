@@ -2,7 +2,7 @@ require 'cognito_jwt_keys'
 require 'cognito_client'
 
 class ApplicationController < ActionController::Base
-  before_action :check_signed_in
+  before_action :check_signed_in, if: Rails.env.production?
 
   def check_signed_in
     @is_signed_in = false
