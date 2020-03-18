@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_16_212635) do
+ActiveRecord::Schema.define(version: 2020_03_18_170534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,28 +62,10 @@ ActiveRecord::Schema.define(version: 2020_03_16_212635) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", null: false
     t.bigint "user_id", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "started_at"
     t.datetime "ended_at"
     t.index ["user_id"], name: "index_games_on_user_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "phone_number", null: false
-    t.string "message_body", null: false
-    t.integer "direction", null: false
-    t.string "media_url"
-    t.string "sms_message_sid", null: false
-    t.string "message_sid", null: false
-    t.string "account_sid", null: false
-    t.string "from_state"
-    t.string "from_city"
-    t.string "from_country"
-    t.string "from_zip"
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "user_cards", force: :cascade do |t|
@@ -100,8 +82,8 @@ ActiveRecord::Schema.define(version: 2020_03_16_212635) do
     t.bigint "game_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "status", null: false
-    t.datetime "joined_at", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "joined_at"
     t.datetime "left_at"
     t.index ["game_id"], name: "index_user_games_on_game_id"
     t.index ["user_id"], name: "index_user_games_on_user_id"
@@ -111,8 +93,6 @@ ActiveRecord::Schema.define(version: 2020_03_16_212635) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone_number", null: false
-    t.string "zipcode"
-    t.string "country"
     t.string "name"
   end
 
