@@ -8,13 +8,11 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'aasm'
 gem 'activerecord-postgis-adapter'
 gem 'aws-sdk-s3'
-gem 'aws-sdk-sqs'
+gem 'aws-sdk-sns'
 gem 'graphql'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
-gem 'shoryuken'
-gem 'twilio-ruby'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -29,6 +27,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'graphiql-rails'
   gem 'guard-rspec'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -39,5 +38,3 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'rspec-deep-ignore-order-matcher'
 end
-
-gem 'graphiql-rails', group: :development

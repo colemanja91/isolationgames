@@ -219,10 +219,6 @@ GEM
       rspec-core (>= 2, < 4, != 2.12.0)
     ruby_dep (1.5.0)
     shellany (0.0.1)
-    shoryuken (5.0.4)
-      aws-sdk-core (>= 2)
-      concurrent-ruby
-      thor
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -270,7 +266,6 @@ DEPENDENCIES
   rspec-deep-ignore-order-matcher
   rspec-rails
   rspec_junit_formatter
-  shoryuken
   spring
   spring-watcher-listen (~> 2.0.0)
   twilio-ruby
