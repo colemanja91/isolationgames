@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_170534) do
+ActiveRecord::Schema.define(version: 2020_03_18_191058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 2020_03_18_170534) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", null: false
+  end
+
+  create_table "cognito_sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "expire_time", null: false
+    t.integer "issued_at", null: false
+    t.string "audience", null: false
+    t.string "refresh_token", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_cognito_sessions_on_user_id"
   end
 
   create_table "game_card_sets", force: :cascade do |t|
@@ -68,6 +79,15 @@ ActiveRecord::Schema.define(version: 2020_03_18_170534) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.string "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
   create_table "user_cards", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -92,8 +112,9 @@ ActiveRecord::Schema.define(version: 2020_03_18_170534) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "phone_number", null: false
     t.string "name"
+    t.string "subscriber", null: false
+    t.string "email", null: false
   end
 
   create_table "white_cards", force: :cascade do |t|

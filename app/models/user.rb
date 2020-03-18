@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :cognito_sessions
   has_many :user_games
   has_many :games
 
-  validates :phone_number, presence: true, uniqueness: true
+  validates :subscriber, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
   def joined_games
     user_games.joined
