@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Mutations::NewGame do
   let(:mutation_name) { described_class.name.demodulize.camelize(:lower) }
-  let(:phone_number) { Faker::PhoneNumber.cell_phone }
   let(:user) { create(:user) }
 
   def mutation

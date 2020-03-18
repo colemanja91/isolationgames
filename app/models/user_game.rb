@@ -15,6 +15,10 @@ class UserGame < ApplicationRecord
     state :joined, initial: true
     state :left
 
+    event :join do
+      transitions from: :left, to: :joined
+    end
+
     event :leave do
       transitions from: :joined, to: :left
     end
