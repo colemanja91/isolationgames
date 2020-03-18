@@ -18,15 +18,9 @@ class GraphqlController < ApplicationController
   private
 
   def context
-    if Rails.env.development?
-      {
-        current_user: User.find_by(email: "colemanja91@gmail.com")
-      }
-    else
-      {
-        current_user: current_user
-      }
-    end
+    {
+      current_user: current_user
+    }
   end
 
   # Handle form data, JSON body, or a blank value
