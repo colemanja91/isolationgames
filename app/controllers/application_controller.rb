@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :check_signed_in
 
   def check_signed_in
-    if Rails.env.development? || Rails.env.test?
+    if Rails.env.development?
       local_signin && return
     end
 
@@ -13,14 +13,15 @@ class ApplicationController < ActionController::Base
     @current_user = nil
     @cognito_session = nil
 
-    cognito_session = nil
-    if session[:cognito_session_id]
-      begin
-        cognito_session = CognitoSession.find(session[:cognito_session_id])
-      rescue ActiveRecord::RecordNotFound
-        return
-      end
+    unauthorized unless session[:cognito_session_id]
+
+    cognito_session = begin
+      CognitoSession.find(session[:cognito_session_id])
+    rescue ActiveRecord::RecordNotFound
+      return
     end
+
+    unauthorized unless cognito_session
 
     now = Time.now.tv_sec
 
@@ -35,7 +36,7 @@ class ApplicationController < ActionController::Base
     Rails.logger.info("Refreshing cognito session: #{cognito_session.id}")
 
     # Need to refresh token
-    return unless refresh_cognito_session(cognito_session)
+    unauthorized unless refresh_cognito_session(cognito_session)
 
     @is_signed_in = true
     @current_user = cognito_session.user
@@ -43,6 +44,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def unauthorized
+    head :unauthorized
+  end
 
   # Testing locally is a pain...
   def local_signin
