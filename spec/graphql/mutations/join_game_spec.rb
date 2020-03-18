@@ -49,4 +49,11 @@ RSpec.describe Mutations::JoinGame do
     result = mutation("thisisnotaname")
     expect(result["errors"]).not_to be_nil
   end
+
+  it "raises an error if the game has ended" do
+    game.start!
+    game.end!
+    result = mutation(game.name)
+    expect(result["errors"]).not_to be_nil
+  end
 end
