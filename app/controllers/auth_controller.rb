@@ -12,10 +12,10 @@ class AuthController < ApplicationController
     end
 
     ActiveRecord::Base.transaction do
-      user = User.where(subscriber: resp.id_token[:sub]).first
+      user = User.find_by(subscriber: resp.id_token[:sub]).first
       if user.nil?
-        user = User.create(subscriber: resp.id_token[:sub],
-                           email: resp.id_token[:email])
+        user = User.create!(subscriber: resp.id_token[:sub],
+                            email: resp.id_token[:email])
       end
 
       cognito_session = CognitoSession.create(user: user,
