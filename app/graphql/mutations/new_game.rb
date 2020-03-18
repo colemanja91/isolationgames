@@ -3,12 +3,10 @@ class Mutations::NewGame < Types::BaseMutation
 
   description "Start a new game"
 
-  argument :phone_number, String, required: true
-
-  def resolve(phone_number:)
-    user = User.find_or_create_by(phone_number: phone_number)
-    game = user.games.create!
-    user.join_game!(game)
+  def resolve()
+    current_user = context[:current_user]
+    game = current_user.games.create!
+    current_user.join_game!(game)
 
     game
   end
