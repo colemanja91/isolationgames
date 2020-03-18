@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :cognito_sessions
   has_many :user_games
   has_many :games
 
