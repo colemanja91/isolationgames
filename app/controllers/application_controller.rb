@@ -2,9 +2,13 @@ require 'cognito_jwt_keys'
 require 'cognito_client'
 
 class ApplicationController < ActionController::Base
-  before_action :check_signed_in, if: Rails.env.production?
+  before_action :check_signed_in
 
   def check_signed_in
+    if Rails.env.development? || Rails.env.test?
+      local_signin && return
+    end
+
     @is_signed_in = false
     @current_user = nil
     @cognito_session = nil
@@ -14,18 +18,13 @@ class ApplicationController < ActionController::Base
       begin
         cognito_session = CognitoSession.find(session[:cognito_session_id])
       rescue ActiveRecord::RecordNotFound
-        render json: {}, status: :unauthorized
+        return
       end
     end
-
-    return unless cognito_session
 
     now = Time.now.tv_sec
 
     if cognito_session.expire_time > now
-      # Still valid, use
-      #
-
       Rails.logger.info("Found a non-expired cognito session: #{cognito_session.id}")
       @is_signed_in = true
       @current_user = cognito_session.user
@@ -41,6 +40,20 @@ class ApplicationController < ActionController::Base
     @is_signed_in = true
     @current_user = cognito_session.user
     @cognito_session = cognito_session
+  end
+
+  private
+
+  # Testing locally is a pain...
+  def local_signin
+    @is_signed_in = true
+    @current_user = User.local_account
+    @cognito_session = @current_user.cognito_session.create!(
+      expire_time: Time.now.tv_sec + 3600,
+      issued_at: Time.now.tv_sec,
+      audience: "test",
+      refresh_token: "token"
+    )
   end
 
   def refresh_cognito_session(cognito_session)

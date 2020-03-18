@@ -1,47 +1,50 @@
 class AuthController < ApplicationController
+  attr_reader :resp
+
   def signin
-    unless params[:code]
-      render nothing: true, status: :bad_request
-      return
-    end
+    render nothing: true, status: :bad_request && return unless params[:code]
 
-    resp = lookup_auth_code(params[:code])
-    unless resp
-      redirect_to '/'
-      return
-    end
+    @resp = auth_code(params[:code])
+    redirect_to '/' && return unless resp
 
-    ActiveRecord::Base.transaction do
-      user = User.find_by(subscriber: resp.id_token[:sub]).first
-      if user.nil?
-        user = User.create!(subscriber: resp.id_token[:sub],
-                            email: resp.id_token[:email])
-      end
-
-      cognito_session = CognitoSession.create(user: user,
-                                              expire_time: resp.id_token[:exp],
-                                              issued_time: resp.id_token[:auth_time],
-                                              audience: resp.id_token[:aud],
-                                              refresh_token: resp.refresh_token)
-      session[:cognito_session_id] = cognito_session.id
-    end
+    create_user_session
 
     # Alternatively, you could redirect to a saved URL
     redirect_to '/'
   end
 
   def signout
-    if cognito_session_id = session[:cognito_session_id]
-      cognito_session = CognitoSession.find(cognito_session_id) rescue nil
-      cognito_session.destroy if cognito_session
+    if cognito_session_id == session[:cognito_session_id]
+      cognito_session = CognitoSession.find(cognito_session_id)
+      return unless cognito_session
+
+      cognito_session.destroy
       session.delete(:cognito_session_id)
     end
 
     redirect_to '/'
   end
 
-  def lookup_auth_code(code)
-    client = new_cognito_client()
-    client.get_pool_tokens(code)
+  private
+
+  def create_user_session
+    ActiveRecord::Base.transaction do
+      cognito_session = user.cognito_sessions.create(
+        expire_time: resp.id_token[:exp],
+        issued_time: resp.id_token[:auth_time],
+        audience: resp.id_token[:aud],
+        refresh_token: resp.refresh_token
+      )
+      session[:cognito_session_id] = cognito_session.id
+    end
+  end
+
+  def user
+    User.find_by(subscriber: resp.id_token[:sub]).first ||
+      User.create!(subscriber: resp.id_token[:sub], email: resp.id_token[:email])
+  end
+
+  def auth_code(code)
+    cognito_client.get_pool_tokens(code)
   end
 end
