@@ -6,6 +6,10 @@ class UserGame < ApplicationRecord
   belongs_to :game
   has_many :user_cards
 
+  validates :user, presence: true
+  validates :game, presence: true
+  validates_uniqueness_of :game, scope: :user
+
   enum status: {
     joined: 0,
     left: 10
@@ -14,6 +18,10 @@ class UserGame < ApplicationRecord
   aasm column: :status, enum: true, whiny_persistance: true do
     state :joined, initial: true
     state :left
+
+    event :join do
+      transitions from: :left, to: :joined
+    end
 
     event :leave do
       transitions from: :joined, to: :left

@@ -24,6 +24,8 @@ class User < ApplicationRecord
   end
 
   def join_game!(game)
-    user_games.create!(game: game)
+    existing_game = user_games.find_by(game: game) || user_games.create!(game: game)
+    existing_game.join! if existing_game.left?
+    existing_game
   end
 end
