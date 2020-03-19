@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_191058) do
+ActiveRecord::Schema.define(version: 2020_03_18_232301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_191058) do
     t.integer "status", default: 0, null: false
     t.datetime "started_at"
     t.datetime "ended_at"
+    t.string "video_link"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 

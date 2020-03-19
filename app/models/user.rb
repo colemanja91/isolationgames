@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   has_many :cognito_sessions
   has_many :user_games
+  has_many :joined_games, through: :user_games, class_name: "Game", source: :game
   has_many :games
 
   validates :subscriber, presence: true, uniqueness: true
@@ -15,12 +16,8 @@ class User < ApplicationRecord
     )
   end
 
-  def joined_games
-    user_games.joined
-  end
-
-  def live_games
-    games.where(status: [:created, :started])
+  def display_name
+    name || email
   end
 
   def join_game!(game)

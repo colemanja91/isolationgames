@@ -12,6 +12,8 @@ class Game < ApplicationRecord
   validates :user, presence: true
   validates :name, presence: true, uniqueness: true
 
+  scope :active, -> { where(status: %i[created started]) }
+
   MIN_PLAYERS = 4
   MAX_PLAYERS = 10
 
@@ -33,10 +35,6 @@ class Game < ApplicationRecord
     event :end do
       transitions from: :started, to: :ended
     end
-  end
-
-  def started_by_display_name
-    user.name
   end
 
   private
