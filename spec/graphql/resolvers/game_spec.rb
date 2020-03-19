@@ -59,8 +59,8 @@ RSpec.describe Resolvers::Game do
   context "game is ended" do
     it "errors" do
       user.join_game!(game)
-      game.start!
-      game.end!
+      game.update!(status: :started)
+      game.update!(status: :ended)
       result = IsolationgamesSchema.execute(query, context: { current_user: user })
       expect(result["errors"]).not_to be_nil
     end
