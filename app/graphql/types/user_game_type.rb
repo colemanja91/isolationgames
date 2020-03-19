@@ -1,5 +1,5 @@
 class Types::UserGameType < Types::BaseObject
-  field :id, String, null: false
+  field :id, Integer, null: false
   field :user_display_name, String, null: false
   field :status, Types::UserGameStatusEnum, null: false
 
