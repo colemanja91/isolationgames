@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   def local_signin
     @is_signed_in = true
     @current_user = User.local_account
-    @cognito_session = @current_user.cognito_session.create!(
+    @cognito_session = @current_user.cognito_sessions.create!(
       expire_time: Time.now.tv_sec + 3600,
       issued_at: Time.now.tv_sec,
       audience: "test",

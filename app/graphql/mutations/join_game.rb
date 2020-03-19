@@ -7,7 +7,7 @@ class Mutations::JoinGame < Types::BaseMutation
 
   def resolve(game_name:)
     current_user = context[:current_user]
-    game = Game.find_by(name: game_name)
+    game = Game.active.find_by(name: game_name)
     unless game
       raise GraphQL::ExecutionError.new("Game does not exist.")
     end
