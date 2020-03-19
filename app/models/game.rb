@@ -41,6 +41,10 @@ class Game < ApplicationRecord
     game_rounds.in_progress.last
   end
 
+  def start_round!
+    game_rounds.create!
+  end
+
   private
 
   def set_name
@@ -49,9 +53,5 @@ class Game < ApplicationRecord
 
   def minimum_players?
     user_games.count >= MIN_PLAYERS
-  end
-
-  def start_round!
-    game_rounds.create!
   end
 end
