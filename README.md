@@ -17,3 +17,11 @@ Then, in Rails console:
 require './db/transitions/load_cards_from_json.rb'
 LoadCardsFromJson.run
 ```
+
+## Credentials
+
+Need to set up the following:
+
+- `config/credentials/test.key`
+- `config/credentials/development.key`
+- `config/master.key`
