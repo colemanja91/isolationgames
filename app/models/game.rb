@@ -29,7 +29,7 @@ class Game < ApplicationRecord
     state :ended
 
     event :start do
-      transitions from: :created, to: :started
+      transitions from: :created, to: :started, guard: :minimum_players?, after: :start_round!
     end
 
     event :end do
@@ -37,9 +37,21 @@ class Game < ApplicationRecord
     end
   end
 
+  def current_round
+    game_rounds.in_progress.last
+  end
+
   private
 
   def set_name
     self.name = Haikunator.haikunate(0)
+  end
+
+  def minimum_players?
+    user_games.count >= MIN_PLAYERS
+  end
+
+  def start_round!
+    game_rounds.create!
   end
 end
