@@ -1,5 +1,5 @@
 class Types::GameType < Types::BaseObject
-  field :id, String, null: false
+  field :id, Integer, null: false
   field :game_owner, Types::UserType, null: false
   field :name, String, null: false
   field :players, [Types::UserGameType], null: false
