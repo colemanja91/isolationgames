@@ -44,4 +44,16 @@ RSpec.describe GameRound, type: :model do
     new_round
     expect(game.reload.current_round.user).to eq(user4)
   end
+
+  describe "#check_status!" do
+    context "all users have played cards" do
+      it "transitions to submitted" do
+
+      end
+    end
+
+    context "not all users have played cards" do
+      it "does not transition"
+    end
+  end
 end

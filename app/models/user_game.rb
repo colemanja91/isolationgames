@@ -34,6 +34,14 @@ class UserGame < ApplicationRecord
     draw_card while user_cards.count < CARDS
   end
 
+  def hand
+    user_cards.available
+  end
+
+  def play_cards(user_card_ids)
+    hand.where(id: user_card_ids).each(&:play!)
+  end
+
   private
 
   def draw_card

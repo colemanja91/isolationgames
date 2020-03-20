@@ -3,6 +3,7 @@
 class UserCard < ApplicationRecord
   belongs_to :user_game
   belongs_to :white_card
+  belongs_to :game_round_won, class_name: 'GameRound'
   has_one :game_round
 
   validates :user_game, presence: true
@@ -18,7 +19,12 @@ class UserCard < ApplicationRecord
     state :played
 
     event :play do
-      transitions from: :available, to: :played
+      transitions from: :available, to: :played, before: :play_card!
     end
+  end
+
+  def play_card!
+    update!(game_round: user_game.game.current_round)
+    game_round.check_status!
   end
 end

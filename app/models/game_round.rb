@@ -6,6 +6,7 @@ class GameRound < ApplicationRecord
   belongs_to :black_card
   belongs_to :user
   has_many :user_cards
+  has_one :winner_user_card, class_name: 'UserCard', foreign_key: 'user_card_id'
 
   before_validation :setup, on: :create
 
@@ -36,6 +37,12 @@ class GameRound < ApplicationRecord
 
     event :end do
       transitions from: :submitted, to: :ended
+    end
+  end
+
+  def check_status!
+    if user_cards.count == (game.user_games.joined.count * black_card.pick)
+      submit!
     end
   end
 
