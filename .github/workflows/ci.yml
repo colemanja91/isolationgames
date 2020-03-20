@@ -47,10 +47,14 @@ jobs:
 
     - name: Setup DB
       run: bin/rails db:drop db:create db:schema:load --trace
+    
+    - name: Add seed data
+      run: bundle exec rake db:seed
 
     - name: Run RSpec
       env:
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        CI: "true"
       run: |
         bundle exec rspec --format RspecJunitFormatter \
           --format progress \

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_232301) do
+ActiveRecord::Schema.define(version: 2020_03_19_021912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2020_03_18_232301) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "game_id", null: false
     t.bigint "black_card_id", null: false
-    t.integer "round", null: false
-    t.integer "status", null: false
+    t.integer "round", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.bigint "user_id", null: false
     t.datetime "started_at"
     t.datetime "closed_at"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_232301) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "white_card_id", null: false
     t.bigint "user_game_id", null: false
+    t.integer "status", default: 0, null: false
     t.index ["user_game_id"], name: "index_user_cards_on_user_game_id"
     t.index ["white_card_id"], name: "index_user_cards_on_white_card_id"
   end

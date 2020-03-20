@@ -51,8 +51,8 @@ RSpec.describe Mutations::JoinGame do
   end
 
   it "raises an error if the game has ended" do
-    game.start!
-    game.end!
+    game.update!(status: :started)
+    game.update!(status: :ended)
     result = mutation(game.name)
     expect(result["errors"]).not_to be_nil
   end
