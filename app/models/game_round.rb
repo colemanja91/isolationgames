@@ -6,7 +6,6 @@ class GameRound < ApplicationRecord
   belongs_to :black_card
   belongs_to :user
   has_many :user_cards
-  has_one :winner_user_card, class_name: 'UserCard', foreign_key: 'user_card_id'
 
   before_validation :setup, on: :create
 

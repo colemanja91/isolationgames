@@ -4,7 +4,7 @@ class UserCard < ApplicationRecord
   include AASM
   belongs_to :user_game
   belongs_to :white_card
-  has_one :game_round
+  belongs_to :game_round, optional: true
 
   validates :user_game, presence: true
   validates :white_card, presence: true
@@ -22,7 +22,7 @@ class UserCard < ApplicationRecord
     state :played
 
     event :play do
-      transitions from: :available, to: :played, before: :play_card!
+      transitions from: :available, to: :played, after: :play_card!
     end
   end
 

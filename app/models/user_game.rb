@@ -39,7 +39,17 @@ class UserGame < ApplicationRecord
   end
 
   def play_cards(user_card_ids)
-    hand.where(id: user_card_ids).each(&:play!)
+    if game.current_round.submitted?
+      raise StandardError, "Cannot play cards after round is submitted"
+    end
+
+    if user_cards.where(game_round: game.current_round).any?
+      raise StandardError, "Cannot play cards multiple times in round"
+    end
+
+    transaction do
+      hand.where(id: user_card_ids).each(&:play!)
+    end
   end
 
   private
