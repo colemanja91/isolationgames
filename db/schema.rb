@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_002329) do
+ActiveRecord::Schema.define(version: 2020_03_20_184647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,10 +61,8 @@ ActiveRecord::Schema.define(version: 2020_03_20_002329) do
     t.datetime "started_at"
     t.datetime "closed_at"
     t.datetime "ended_at"
-    t.bigint "user_card_id"
     t.index ["black_card_id"], name: "index_game_rounds_on_black_card_id"
     t.index ["game_id"], name: "index_game_rounds_on_game_id"
-    t.index ["user_card_id"], name: "index_game_rounds_on_user_card_id"
     t.index ["user_id"], name: "index_game_rounds_on_user_id"
   end
 
@@ -96,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_03_20_002329) do
     t.bigint "user_game_id", null: false
     t.integer "status", default: 0, null: false
     t.bigint "game_round_id"
+    t.boolean "winner", default: false, null: false
     t.index ["game_round_id"], name: "index_user_cards_on_game_round_id"
     t.index ["user_game_id"], name: "index_user_cards_on_user_game_id"
     t.index ["white_card_id"], name: "index_user_cards_on_white_card_id"
@@ -134,7 +133,6 @@ ActiveRecord::Schema.define(version: 2020_03_20_002329) do
   add_foreign_key "game_card_sets", "games"
   add_foreign_key "game_rounds", "black_cards"
   add_foreign_key "game_rounds", "games"
-  add_foreign_key "game_rounds", "user_cards"
   add_foreign_key "game_rounds", "users"
   add_foreign_key "games", "users"
   add_foreign_key "user_cards", "game_rounds"
