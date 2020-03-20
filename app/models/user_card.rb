@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UserCard < ApplicationRecord
+  include AASM
   belongs_to :user_game
   belongs_to :white_card
   belongs_to :game_round_won, class_name: 'GameRound'
