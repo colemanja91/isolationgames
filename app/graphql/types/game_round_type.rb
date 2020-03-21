@@ -5,6 +5,7 @@ class Types::GameRoundType < Types::BaseObject
   field :round, Integer, null: false
   field :status, Types::GameRoundStatusEnum, null: false
   field :user, Types::UserType, null: false
+  field :winner, Types::UserCardType, null: true
 
   def game_round
     @object

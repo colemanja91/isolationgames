@@ -45,6 +45,10 @@ class GameRound < ApplicationRecord
     end
   end
 
+  def winner
+    user_cards.winner&.first
+  end
+
   private
 
   def setup
