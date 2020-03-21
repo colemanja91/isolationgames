@@ -34,6 +34,24 @@ class UserGame < ApplicationRecord
     draw_card while user_cards.count < CARDS
   end
 
+  def hand
+    user_cards.available
+  end
+
+  def play_cards(user_card_ids)
+    if game.current_round.submitted?
+      raise StandardError, "Cannot play cards after round is submitted"
+    end
+
+    if user_cards.where(game_round: game.current_round).any?
+      raise StandardError, "Cannot play cards multiple times in round"
+    end
+
+    transaction do
+      hand.where(id: user_card_ids).each(&:play!)
+    end
+  end
+
   private
 
   def draw_card

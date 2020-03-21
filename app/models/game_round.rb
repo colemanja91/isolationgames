@@ -39,6 +39,12 @@ class GameRound < ApplicationRecord
     end
   end
 
+  def check_status!
+    if user_cards.count == (game.user_games.joined.count * black_card.pick)
+      submit!
+    end
+  end
+
   private
 
   def setup

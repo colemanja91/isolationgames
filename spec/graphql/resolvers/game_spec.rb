@@ -2,15 +2,31 @@ require 'rails_helper'
 
 RSpec.describe Resolvers::Game do
   let(:user) { create(:user) }
-  let(:game) { create(:game) }
+  let(:game) { create(:game, as_status: "started") }
 
   let(:query) {
     <<-GRAPHQL
       {
         game(gameName: "#{game.name}") {
           id
+          currentRound {
+            blackCard {
+              text
+              pick
+            }
+            playedCards {
+              id
+              text
+            }
+            round
+            status
+          }
           gameOwner {
             displayName
+          }
+          hand {
+            id
+            text
           }
           name
           players{
@@ -38,13 +54,31 @@ RSpec.describe Resolvers::Game do
 
       it "returns the players" do
         result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
-        expect(game.user_games.count).to eq(2)
         expect(result["players"].count).to eq(game.user_games.count)
       end
 
       it "returns the game status" do
         result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
-        expect(result["status"]).to eq("created")
+        expect(result["status"]).to eq(game.status)
+      end
+
+      it "returns empty array of playedCards if the round is not submitted" do
+        expect(game.current_round.started?).to be true
+        result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
+        expect(result["currentRound"]["playedCards"]).to be_empty
+      end
+
+      it "returns array of playedCards if the round is submitted" do
+        expect(game.current_round.started?).to be true
+        game.user_games.first.play_cards(game.user_games.first.hand.sample(1).pluck(:id))
+        game.current_round.submit!
+        result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
+        expect(result["currentRound"]["playedCards"]).not_to be_empty
+      end
+
+      it "returns the user's hand" do
+        result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
+        expect(result["hand"].pluck(:id)).to eq(user.user_games.first.hand.pluck(:id))
       end
     end
 
