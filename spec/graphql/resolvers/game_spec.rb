@@ -10,13 +10,23 @@ RSpec.describe Resolvers::Game do
         game(gameName: "#{game.name}") {
           id
           currentRound {
+            blackCard {
+              text
+              pick
+            }
             playedCards {
               id
               text
             }
+            round
+            status
           }
           gameOwner {
             displayName
+          }
+          hand {
+            id
+            text
           }
           name
           players{
@@ -65,6 +75,11 @@ RSpec.describe Resolvers::Game do
         game.current_round.submit!
         result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
         expect(result["currentRound"]["playedCards"]).not_to be_empty
+      end
+
+      it "returns the user's hand" do
+        result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
+        expect(result["hand"].pluck(:id)).to eq(user.user_games.first.hand.pluck(:id))
       end
     end
 
