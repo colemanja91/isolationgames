@@ -14,6 +14,7 @@ class Mutations::PlayCards < Types::BaseMutation
       raise GraphQL::ExecutionError.new("Must play #{user_game.game.current_round.black_card.pick} card(s).")
     end
 
-    user_game.play_cards!(user_card_ids)
+    user_game.play_cards(user_card_ids)
+    user_game.game
   end
 end
