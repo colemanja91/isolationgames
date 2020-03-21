@@ -54,13 +54,12 @@ RSpec.describe Resolvers::Game do
 
       it "returns the players" do
         result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
-        expect(game.user_games.count).to eq(2)
         expect(result["players"].count).to eq(game.user_games.count)
       end
 
       it "returns the game status" do
         result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
-        expect(result["status"]).to eq("created")
+        expect(result["status"]).to eq(game.status)
       end
 
       it "returns empty array of playedCards if the round is not submitted" do
