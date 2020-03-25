@@ -4,9 +4,9 @@ class Mutations::PickWinner < Types::BaseMutation
   description "Pick winning for the current round of a game"
 
   argument :game_id, Integer, required: true
-  argument :user_card_id, Integer, required: true
+  argument :user_round_id, Integer, required: true
 
-  def resolve(game_id:, user_card_id:)
+  def resolve(game_id:, user_round_id:)
     current_user = context[:current_user]
     game = current_user.user_games.find_by(game_id: game_id).game
 
@@ -14,7 +14,7 @@ class Mutations::PickWinner < Types::BaseMutation
       raise GraphQL::ExecutionError.new("Only the round judge can pick a winner.")
     end
 
-    game.current_round.user_cards.find(user_card_id).update!(winner: true)
+    game.current_round.user_rounds.find(user_round_id).update!(winner: true)
     game
   end
 end

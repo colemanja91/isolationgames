@@ -23,6 +23,6 @@ RSpec.describe Mutations::PlayCards do
     user_game = user.user_games.find_by(game: game)
     card_ids = user_game.hand.sample(pick).pluck(:id)
     IsolationgamesSchema.execute(mutation(card_ids), context: { current_user: user })
-    expect(game.reload.current_round.user_cards.pluck(:id)).to include(*card_ids)
+    expect(game.reload.current_round.user_rounds.joins(:user_cards).pluck("user_cards.id")).to include(*card_ids)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_184647) do
+ActiveRecord::Schema.define(version: 2020_03_21_151222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,10 +93,9 @@ ActiveRecord::Schema.define(version: 2020_03_20_184647) do
     t.bigint "white_card_id", null: false
     t.bigint "user_game_id", null: false
     t.integer "status", default: 0, null: false
-    t.bigint "game_round_id"
-    t.boolean "winner", default: false, null: false
-    t.index ["game_round_id"], name: "index_user_cards_on_game_round_id"
+    t.bigint "user_round_id"
     t.index ["user_game_id"], name: "index_user_cards_on_user_game_id"
+    t.index ["user_round_id"], name: "index_user_cards_on_user_round_id"
     t.index ["white_card_id"], name: "index_user_cards_on_white_card_id"
   end
 
@@ -110,6 +109,16 @@ ActiveRecord::Schema.define(version: 2020_03_20_184647) do
     t.datetime "left_at"
     t.index ["game_id"], name: "index_user_games_on_game_id"
     t.index ["user_id"], name: "index_user_games_on_user_id"
+  end
+
+  create_table "user_rounds", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "game_round_id", null: false
+    t.bigint "user_game_id", null: false
+    t.boolean "winner", default: false, null: false
+    t.index ["game_round_id"], name: "index_user_rounds_on_game_round_id"
+    t.index ["user_game_id"], name: "index_user_rounds_on_user_game_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -135,8 +144,8 @@ ActiveRecord::Schema.define(version: 2020_03_20_184647) do
   add_foreign_key "game_rounds", "games"
   add_foreign_key "game_rounds", "users"
   add_foreign_key "games", "users"
-  add_foreign_key "user_cards", "game_rounds"
   add_foreign_key "user_cards", "user_games"
+  add_foreign_key "user_cards", "user_rounds"
   add_foreign_key "user_cards", "white_cards"
   add_foreign_key "user_games", "games"
   add_foreign_key "user_games", "users"

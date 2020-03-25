@@ -5,7 +5,7 @@ class GameRound < ApplicationRecord
   belongs_to :game
   belongs_to :black_card
   belongs_to :user
-  has_many :user_cards
+  has_many :user_rounds
 
   before_validation :setup, on: :create
 
@@ -40,13 +40,11 @@ class GameRound < ApplicationRecord
   end
 
   def check_status!
-    if user_cards.count == (game.user_games.joined.count * black_card.pick)
-      submit!
-    end
+    submit! if user_rounds.count == game.user_games.joined.count
   end
 
   def winner
-    user_cards.winner&.first
+    user_rounds.winner&.first
   end
 
   private

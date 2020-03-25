@@ -15,7 +15,7 @@ RSpec.describe UserGame, type: :model do
     game.user_games.each do |user_game|
       card_ids = user_game.hand.sample(1).pluck(:id)
       user_game.play_cards(card_ids)
-      expect(game.current_round.reload.user_cards.pluck(:id)).to include(*card_ids)
+      expect(game.current_round.reload.user_rounds.joins(:user_cards).pluck("user_cards.id")).to include(*card_ids)
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe UserGame, type: :model do
     game.user_games.each do |user_game|
       card_ids = user_game.hand.sample(2).pluck(:id)
       user_game.play_cards(card_ids)
-      expect(game.current_round.reload.user_cards.pluck(:id)).to include(*card_ids)
+      expect(game.current_round.reload.user_rounds.joins(:user_cards).pluck("user_cards.id")).to include(*card_ids)
     end
   end
 

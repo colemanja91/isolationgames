@@ -14,9 +14,11 @@ RSpec.describe Resolvers::Game do
               text
               pick
             }
-            playedCards {
+            userRounds {
               id
-              text
+              userCards {
+                text
+              }
             }
             round
             status
@@ -65,7 +67,7 @@ RSpec.describe Resolvers::Game do
       it "returns empty array of playedCards if the round is not submitted" do
         expect(game.current_round.started?).to be true
         result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
-        expect(result["currentRound"]["playedCards"]).to be_empty
+        expect(result["currentRound"]["userRounds"]).to be_empty
       end
 
       it "returns array of playedCards if the round is submitted" do
@@ -73,7 +75,7 @@ RSpec.describe Resolvers::Game do
         game.user_games.first.play_cards(game.user_games.first.hand.sample(1).pluck(:id))
         game.current_round.submit!
         result = IsolationgamesSchema.execute(query, context: { current_user: user })["data"]["game"]
-        expect(result["currentRound"]["playedCards"]).not_to be_empty
+        expect(result["currentRound"]["userRounds"]).not_to be_empty
       end
 
       it "returns the user's hand" do
