@@ -16,7 +16,6 @@ RSpec.describe GraphqlController, type: :controller do
       post :execute, params: { query: query }, session: { cognito_session_id: session.id }
 
       expect(response).to have_http_status(:ok)
-      pp response.body
       expect(JSON.parse(response.body)["data"]["user"]["id"].to_i).to eq(user.id)
     end
 

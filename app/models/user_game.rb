@@ -5,6 +5,7 @@ class UserGame < ApplicationRecord
   belongs_to :user
   belongs_to :game
   has_many :user_cards
+  has_many :user_rounds
 
   validates :user, presence: true
   validates :game, presence: true
@@ -43,13 +44,13 @@ class UserGame < ApplicationRecord
       raise StandardError, "Cannot play cards after round is submitted"
     end
 
-    if user_cards.where(game_round: game.current_round).any?
+    if user_rounds.where(game_round: game.current_round).any?
       raise StandardError, "Cannot play cards multiple times in round"
     end
 
-    transaction do
-      hand.where(id: user_card_ids).each(&:play!)
-    end
+    cards = hand.where(id: user_card_ids)
+    user_round = user_rounds.create!(game_round: game.current_round)
+    cards.update_all(user_round_id: user_round.id)
   end
 
   private
