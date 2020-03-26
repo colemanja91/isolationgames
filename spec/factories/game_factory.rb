@@ -9,7 +9,7 @@ FactoryBot.define do
       game.user.join_game!(game)
 
       if evaluator.as_status == "started"
-        3.times do
+        (Game::MIN_PLAYERS - 1).times do
           user = create(:user)
           user.join_game!(game)
         end
