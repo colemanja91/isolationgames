@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from "react-apollo"
 import { client } from "./apollo"
-import Game from './src/gameComponent';
+import NewGameButton from './src/components/NewGameButton'
 
 class App extends Component {
   render() { 
@@ -12,7 +12,7 @@ class App extends Component {
           <header>
             <h1>Isolation Games</h1>
           </header>
-          <Game />
+          <NewGameButton />
         </div>
       </ApolloProvider>
      );

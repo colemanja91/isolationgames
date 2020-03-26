@@ -24,3 +24,24 @@ export const NEW_GAME = gql `
     }
   }
 `
+
+export const JOIN_GAME = gql `
+  mutation JoinGame($gameName: String!) {
+    joinGame(
+      gameName: $gameName
+    ){
+      id
+      isOwner
+      name
+      players {
+        id
+        isOwner
+        status
+        userDisplayName
+      }
+      startedAt
+      status
+      videoLink
+    }
+  }
+`
