@@ -33,7 +33,7 @@ class Game < ApplicationRecord
     end
 
     event :end do
-      transitions from: :started, to: :ended
+      transitions from: :started, to: :ended, after: :end_user_games!
     end
   end
 
@@ -43,6 +43,18 @@ class Game < ApplicationRecord
 
   def start_round!
     game_rounds.create!
+  end
+
+  def check_status!
+    return unless started?
+
+    if user_games.joined.count < MIN_PLAYERS
+      self.end!
+    end
+  end
+
+  def end_user_games!
+    user_games.joined.each(&:leave!)
   end
 
   private
