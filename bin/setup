@@ -16,7 +16,6 @@ FileUtils.chdir APP_ROOT do
   puts '== Installing dependencies =='
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
-  system('yarn install')
 
   puts "\n== Preparing database =="
   # Create a local data directory for Postgres on Docker
