@@ -1,6 +1,7 @@
 module Types
   class MutationType < GraphQL::Schema::Object
     field :add_video_link, Types::GameType, mutation: Mutations::AddVideoLink
+    field :end_game, Types::GameType, mutation: Mutations::EndGame
     field :join_game, Types::GameType, mutation: Mutations::JoinGame
     field :leave_game, Types::UserGameType, mutation: Mutations::LeaveGame
     field :new_game, Types::GameType, mutation: Mutations::NewGame
