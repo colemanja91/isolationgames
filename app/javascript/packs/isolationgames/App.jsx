@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from "react-apollo"
 import { client } from "./apollo"
-import NewGameButton from './src/components/NewGameButton'
+import NavBar from './src/components/NavBar'
+import './assets/stylesheets/App.scss'
 
 class App extends Component {
   render() { 
     return ( 
       <ApolloProvider client={client}>
-        <div>
-          <header>
-            <h1>Isolation Games</h1>
-          </header>
-          <NewGameButton />
-        </div>
+        <NavBar />
       </ApolloProvider>
      );
   }
