@@ -3,7 +3,13 @@ import { Mutation } from "react-apollo";
 import { NEW_GAME } from "../apollo"
 
 class Game extends Component {
-  handleFormSubmit = () => {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  handleFormSubmit = ( props ) => {
+    let { newGame } = props;
     newGame()
     .then((response) =>{
       alert('New game created! Invite friends to get started')
@@ -38,10 +44,9 @@ class Game extends Component {
         {(newGame) =>(
           <div>
             <h2>New Game</h2>
-            <this.showErrors/>
             <form onSubmit={ e =>{
               e.preventDefault()
-              this.handleFormSubmit({ createBook })
+              this.handleFormSubmit({ newGame })
             }}>
               <button type="submit">Start a new game!</button>
             </form>

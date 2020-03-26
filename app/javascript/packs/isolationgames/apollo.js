@@ -8,11 +8,16 @@ export  const client = new ApolloClient({
 
 export const NEW_GAME = gql `
   mutation NewGame {
-    createBook{
+    newGame{
       id
-      gameOwner
+      isOwner
       name
-      players
+      players {
+        id
+        isOwner
+        status
+        userDisplayName
+      }
       startedAt
       status
       videoLink

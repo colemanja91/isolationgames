@@ -10,7 +10,7 @@ class App extends Component {
       <ApolloProvider client={client}>
         <div>
           <header>
-            <h1>Cards Against Humanity</h1>
+            <h1>Isolation Games</h1>
           </header>
           <Game />
         </div>
