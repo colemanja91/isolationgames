@@ -3,6 +3,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import ChangeDisplayName from "./ChangeDisplayName";
 import SidebarPlayer from "./SidebarPlayer";
 import "../../assets/stylesheets/components/Sidebar.scss";
 
@@ -22,9 +23,10 @@ function Sidebar({ gameData, userData }) {
       <List disablePadding dense>
         <Typography variant="h4">Playing as:</Typography>
         <ListItem className="sidebar-item">
-          <Typography>
-            {displayName} <i>Click here to change display name</i>
-          </Typography>
+          <Typography>{displayName} </Typography>
+        </ListItem>
+        <ListItem className="sidebar-item">
+          <ChangeDisplayName user={userData.user} />
         </ListItem>
         <ListItem className="sidebar-item">
           <Typography>

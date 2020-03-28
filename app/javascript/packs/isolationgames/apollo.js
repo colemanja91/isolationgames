@@ -21,12 +21,21 @@ export const JOIN_GAME = gql`
   }
 `;
 
+export const UPDATE_USER_NAME = gql`
+  mutation UpdateUserName($name: String!) {
+    updateUserName(name: $name) {
+      displayName
+    }
+  }
+`;
+
 export const USER = gql`
   query User {
     user {
       id
       displayName
       email
+      name
     }
   }
 `;
