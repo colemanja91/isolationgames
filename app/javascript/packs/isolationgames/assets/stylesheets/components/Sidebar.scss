@@ -1,0 +1,13 @@
+.sidebar {
+  display: flex;
+  max-width: 30%;
+  height: 100vh;
+  border: 6px solid black;
+  float: left;
+}
+
+.sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

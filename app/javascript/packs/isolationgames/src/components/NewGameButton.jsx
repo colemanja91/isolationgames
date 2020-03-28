@@ -22,7 +22,6 @@ function NewGameButton() {
   const [newGame] = useMutation(NEW_GAME);
   return (
     <div className="GameButton">
-      <Errors errors={errors} />
       <form
         onSubmit={e => {
           e.preventDefault();
