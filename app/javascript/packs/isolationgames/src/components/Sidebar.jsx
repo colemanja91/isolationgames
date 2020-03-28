@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import SidebarPlayer from "./SidebarPlayer";
 import "../../assets/stylesheets/components/Sidebar.scss";
 
 function Sidebar({ gameData, userData }) {
@@ -30,6 +31,13 @@ function Sidebar({ gameData, userData }) {
             Email: <i>{email}</i>
           </Typography>
         </ListItem>
+        <Divider style={{ margin: "12px 0" }} />
+        <Typography variant="h4">Players ({players.length}):</Typography>
+        {players.map((player, index) => (
+          <Fragment key={`sidebar-player-${index}`}>
+            <SidebarPlayer player={player} />
+          </Fragment>
+        ))}
         <Divider style={{ margin: "12px 0" }} />
       </List>
     </div>
