@@ -1,10 +1,27 @@
-import React from "react";
-import JoinGameButton from "./JoinGameButton";
+import React, { useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { useMutation } from "react-apollo";
+import { JOIN_GAME } from "../../apollo";
 
 function JoinGame() {
+  let { name } = useParams();
+  let history = useHistory();
+
+  const [join, { loading, error }] = useMutation(JOIN_GAME, {
+    onCompleted() {
+      console.log("is this being called twice?");
+      history.push("/");
+    }
+  });
+
+  if (loading) return <p>loading...</p>;
+  if (error) return <p>An error occurred</p>;
+
   return (
     <div>
-      <JoinGameButton />
+      {join({
+        variables: { gameName: name }
+      })}
     </div>
   );
 }

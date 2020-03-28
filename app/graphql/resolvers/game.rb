@@ -7,7 +7,7 @@ class Resolvers::Game < Resolvers::Base
     current_user = context[:current_user]
     game = current_user.current_game&.game
 
-    raise GraphQL::ExecutionError, 'Game not found.' unless game
+    return nil unless game
 
     game
   end

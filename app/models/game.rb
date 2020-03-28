@@ -34,6 +34,7 @@ class Game < ApplicationRecord
     end
 
     event :end do
+      transitions from: :created, to: :ended, after: :end_user_games!
       transitions from: :started, to: :ended, after: :end_user_games!
     end
   end
@@ -49,7 +50,11 @@ class Game < ApplicationRecord
   def check_status!
     return unless started?
 
-    end! if user_games.joined.count < MIN_PLAYERS
+    end! if user_games.joined.count < MIN_PLAYERS || owner_gone?
+  end
+
+  def owner_gone?
+    user_games.left.where(user_id: user_id).any?
   end
 
   def end_user_games!
@@ -59,7 +64,7 @@ class Game < ApplicationRecord
   private
 
   def set_name
-    self.name = Haikunator.haikunate(0)
+    self.name = Haikunator.haikunate
   end
 
   def minimum_players?

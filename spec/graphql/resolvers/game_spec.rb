@@ -87,9 +87,9 @@ RSpec.describe Resolvers::Game do
     end
 
     context 'user has not joined' do
-      it 'errors' do
+      it 'returns null' do
         result = IsolationgamesSchema.execute(query, context: { current_user: user })
-        expect(result['errors']).not_to be_nil
+        expect(result['data']['game']).to be_nil
       end
     end
   end

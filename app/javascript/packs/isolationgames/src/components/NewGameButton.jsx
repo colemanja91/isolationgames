@@ -3,15 +3,15 @@ import { useMutation } from "react-apollo";
 import { NEW_GAME } from "../../apollo";
 import "../../assets/stylesheets/components/GameButton.scss";
 
-function NewGameButton({ setCurrentGameId }) {
+function NewGameButton() {
   const [errors, setErrors] = useState([]);
 
   const handleFormSubmit = props => {
     let { newGame } = props;
     newGame()
       .then(response => {
-        //alert("New game created! Invite other horrible people to get started.");
-        setCurrentGameId(response.data.newGame.id);
+        alert("New game created! Invite other horrible people to get started.");
+        window.location.reload(false);
       })
       .catch(e => {
         // let messages = JSON.parse(e.graphQLErrors[0].message);
