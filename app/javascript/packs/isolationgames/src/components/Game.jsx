@@ -1,15 +1,9 @@
 import React from "react";
-import { useQuery } from "react-apollo";
-import { GAME } from "../../apollo";
+import Sidebar from "./Sidebar";
 
 function Game({ data }) {
   const { isOwner, name, players, startedAt, status, videoLink } = data.game;
-  return (
-    <div>
-      {name}
-      {status}
-    </div>
-  );
+  return <Sidebar data={data} />;
 }
 
 export default Game;
