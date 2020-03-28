@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <div className="Home">
-      {!error && data ? <Game data={data} /> : <NewGameButton />}
+      {!error && data.game ? <Game data={data} /> : <NewGameButton />}
     </div>
   );
 }
