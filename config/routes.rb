@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+    mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
   end
-  post "/graphql", to: "graphql#execute"
+  post '/graphql', to: 'graphql#execute'
 
   get '/sign_in', as: 'signin', to: 'sessions#signin'
   get '/sign_out', as: 'signout', to: 'sessions#signout'
@@ -12,4 +14,5 @@ Rails.application.routes.draw do
   get 'auth/sign_out', to: 'auth#signout'
 
   root to: 'index#index'
+  match '*path', to: 'index#index', via: :all
 end

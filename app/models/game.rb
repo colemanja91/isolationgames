@@ -59,7 +59,7 @@ class Game < ApplicationRecord
   private
 
   def set_name
-    self.name = Haikunator.haikunate(0)
+    self.name = Haikunator.haikunate
   end
 
   def minimum_players?

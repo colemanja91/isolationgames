@@ -22,8 +22,8 @@ export const JOIN_GAME = gql`
 `;
 
 export const GAME = gql`
-  query Game($id: Int!) {
-    game(id: $id) {
+  query Game {
+    game {
       isOwner
       name
       players {
