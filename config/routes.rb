@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get 'auth/sign_in', to: 'auth#signin'
   get 'auth/sign_out', to: 'auth#signout'
 
-  root to: 'home#index'
+  root to: 'index#index'
 end

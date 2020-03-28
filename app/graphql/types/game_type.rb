@@ -1,5 +1,6 @@
 class Types::GameType < Types::BaseObject
   field :id, Integer, null: false
+  field :is_owner, Boolean, null: false
   field :current_round, Types::GameRoundType, null: true
   field :game_owner, Types::UserType, null: false
   field :hand, [Types::UserCardType], null: true
@@ -15,6 +16,10 @@ class Types::GameType < Types::BaseObject
 
   def current_user
     @context[:current_user]
+  end
+
+  def is_owner
+    current_user == game_owner
   end
 
   def game_owner
