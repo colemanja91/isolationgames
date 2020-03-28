@@ -10,6 +10,7 @@ class UserGame < ApplicationRecord
   validates :user, presence: true
   validates :game, presence: true
   validates_uniqueness_of :game, scope: :user
+  validate :only_one_active_per_user
 
   CARDS = 10
 
@@ -41,11 +42,11 @@ class UserGame < ApplicationRecord
 
   def play_cards(user_card_ids)
     if game.current_round.submitted?
-      raise StandardError, "Cannot play cards after round is submitted"
+      raise StandardError, 'Cannot play cards after round is submitted'
     end
 
     if user_rounds.where(game_round: game.current_round).any?
-      raise StandardError, "Cannot play cards multiple times in round"
+      raise StandardError, 'Cannot play cards multiple times in round'
     end
 
     cards = hand.where(id: user_card_ids)
@@ -64,5 +65,9 @@ class UserGame < ApplicationRecord
       offset = rand(white_deck.count)
       user_cards.create!(white_card: white_deck.offset(offset).first)
     end
+  end
+
+  def only_one_active_per_user
+    user.games.active.empty? && user.user_games.joined.empty?
   end
 end
