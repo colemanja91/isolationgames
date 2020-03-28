@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Mutations::PlayCards do
-  let(:game) { create(:game, as_status: "started") }
+  let(:game) { create(:game, as_status: 'started') }
   let(:user) { game.user_games.last.user }
 
   def mutation(user_card_ids)
     <<~GQL
       mutation {
-        playCards(gameId: #{game.id}, userCardIds: #{user_card_ids}) {
+        playCards( userCardIds: #{user_card_ids}) {
           id
           currentRound {
             round
@@ -18,11 +20,11 @@ RSpec.describe Mutations::PlayCards do
     GQL
   end
 
-  it "plays the cards" do
+  it 'plays the cards' do
     pick = game.current_round.black_card.pick
     user_game = user.user_games.find_by(game: game)
     card_ids = user_game.hand.sample(pick).pluck(:id)
     IsolationgamesSchema.execute(mutation(card_ids), context: { current_user: user })
-    expect(game.reload.current_round.user_rounds.joins(:user_cards).pluck("user_cards.id")).to include(*card_ids)
+    expect(game.reload.current_round.user_rounds.joins(:user_cards).pluck('user_cards.id')).to include(*card_ids)
   end
 end

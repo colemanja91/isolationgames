@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Mutations::StartGame do
   let(:game) { create(:game) }
 
-  let(:mutation) {
+  let(:mutation) do
     <<~GQL
       mutation {
-        startGame(gameId: #{game.id}) {
+        startGame {
           id
           currentRound {
             user {
@@ -22,7 +24,7 @@ RSpec.describe Mutations::StartGame do
         }
       }
     GQL
-  }
+  end
 
   before do
     3.times do
@@ -31,15 +33,15 @@ RSpec.describe Mutations::StartGame do
     end
   end
 
-  it "starts the game" do
-    expect(game.status).to eq("created")
+  it 'starts the game' do
+    expect(game.status).to eq('created')
     IsolationgamesSchema.execute(mutation, context: { current_user: game.user })
-    expect(game.reload.status).to eq("started")
+    expect(game.reload.status).to eq('started')
   end
 
-  it "returns info on the current round" do
-    result = IsolationgamesSchema.execute(mutation, context: { current_user: game.user })["data"]["startGame"]
-    expect(result["currentRound"]["round"]).to eq(game.current_round.round)
-    expect(result["currentRound"]["blackCard"]["text"]).to eq(game.current_round.black_card.text)
+  it 'returns info on the current round' do
+    result = IsolationgamesSchema.execute(mutation, context: { current_user: game.user })['data']['startGame']
+    expect(result['currentRound']['round']).to eq(game.current_round.round)
+    expect(result['currentRound']['blackCard']['text']).to eq(game.current_round.black_card.text)
   end
 end
