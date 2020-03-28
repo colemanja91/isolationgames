@@ -10,7 +10,7 @@ class Mutations::JoinGame < Types::BaseMutation
   def resolve(game_name:)
     current_user = context[:current_user]
 
-    if current_user.games.active.present? || current_user.user_games.joined.present?
+    if current_user.current_game.present?
       raise GraphQL::ExecutionError, 'User has already joined a game.'
     end
 

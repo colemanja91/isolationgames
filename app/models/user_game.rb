@@ -68,6 +68,6 @@ class UserGame < ApplicationRecord
   end
 
   def only_one_active_per_user
-    user.games.active.empty? && user.user_games.joined.empty?
+    user.current_game.nil?
   end
 end

@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   has_many :cognito_sessions
   has_many :user_games
-  has_many :joined_games, through: :user_games, class_name: "Game", source: :game
+  has_many :joined_games, through: :user_games, class_name: 'Game', source: :game
   has_many :games
 
   validates :subscriber, presence: true, uniqueness: true
@@ -11,9 +11,13 @@ class User < ApplicationRecord
 
   def self.local_account
     find_or_create_by!(
-      email: "webmaster@isolation.games",
-      subscriber: "local"
+      email: 'webmaster@isolation.games',
+      subscriber: 'local'
     )
+  end
+
+  def current_game
+    user_games.joined.first
   end
 
   def display_name
