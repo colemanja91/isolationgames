@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from "react-apollo";
 import { JOIN_GAME } from "../../apollo";
-import '../../assets/stylesheets/components/Button.scss'
+import '../../assets/stylesheets/components/GameButton.scss'
 
 class JoinGameButton extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ class JoinGameButton extends Component {
     return (
       <Mutation mutation={JOIN_GAME} >
         {(joinGame) =>(
-          <div className="JoinGameButton">
+          <div className="GameButton">
             <this.showErrors/>
             <form onSubmit={ e =>{
               e.preventDefault()
@@ -65,8 +65,7 @@ class JoinGameButton extends Component {
             }}>
               <button type="submit">Join an existing game.</button>
               <div>
-                <label>Game Name</label>
-                <input type="text" id="gameName" onChange={this.handleChange} required/>
+                <input type="text" id="gameName" placeholder="Game Name (i.e. advantegeous-aardvark)" onChange={this.handleChange} required/>
               </div>
             </form>
           </div>
