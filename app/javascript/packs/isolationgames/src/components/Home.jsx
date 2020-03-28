@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useQuery } from "react-apollo";
 import { GAME } from "../../apollo";
 import Game from "./Game";
@@ -14,16 +13,7 @@ function Home() {
 
   return (
     <div className="Home">
-      {!error && data ? (
-        <Game data={data} />
-      ) : (
-        <Fragment>
-          <NewGameButton />
-          <Link to="/joinGame" className="GameButton">
-            <button type="button">Join existing game.</button>
-          </Link>
-        </Fragment>
-      )}
+      {!error && data ? <Game data={data} /> : <NewGameButton />}
     </div>
   );
 }

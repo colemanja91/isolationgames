@@ -14,7 +14,7 @@ function Routes() {
       <Route path="/how-to-play">
         <HowToPlay />
       </Route>
-      <Route path="/joinGame" component={JoinGame} />
+      <Route path="/join/:name" component={JoinGame} />
       <Route path="/" width="100%" component={Home} />
     </Switch>
   );
