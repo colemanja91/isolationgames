@@ -21,7 +21,7 @@ class User < ApplicationRecord
   end
 
   def display_name
-    name || email
+    name.presence || email
   end
 
   def join_game!(game)
