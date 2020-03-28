@@ -1,19 +1,29 @@
 import React from "react";
 import { useQuery } from "react-apollo";
-import { GAME } from "../../apollo";
+import { GAME, USER } from "../../apollo";
 import Game from "./Game";
 import NewGameButton from "./NewGameButton";
 import "../../assets/stylesheets/components/Home.scss";
 import "../../assets/stylesheets/components/GameButton.scss";
 
 function Home() {
-  const { loading, error, data } = useQuery(GAME);
+  const { loading: gameLoading, error: gameError, data: gameData } = useQuery(
+    GAME
+  );
+  const { loading: userLoading, error: userError, data: userData } = useQuery(
+    USER
+  );
 
-  if (loading) return <div></div>;
+  if (gameLoading || userLoading) return <div></div>;
+  if (gameError || userError) return <div></div>;
 
   return (
     <div className="Home">
-      {!error && data.game ? <Game data={data} /> : <NewGameButton />}
+      {gameData.game ? (
+        <Game gameData={gameData} userData={userData} />
+      ) : (
+        <NewGameButton />
+      )}
     </div>
   );
 }

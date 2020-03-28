@@ -21,6 +21,16 @@ export const JOIN_GAME = gql`
   }
 `;
 
+export const USER = gql`
+  query User {
+    user {
+      id
+      displayName
+      email
+    }
+  }
+`;
+
 export const GAME = gql`
   query Game {
     game {

@@ -1,9 +1,8 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 
-function Game({ data }) {
-  const { isOwner, name, players, startedAt, status, videoLink } = data.game;
-  return <Sidebar data={data} />;
+function Game({ gameData, userData }) {
+  return <Sidebar gameData={gameData} userData={userData} />;
 }
 
 export default Game;
