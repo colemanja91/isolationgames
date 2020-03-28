@@ -1,13 +1,18 @@
+# frozen_string_literal: true
+
 class Mutations::NewRound < Types::BaseMutation
   null false
 
-  description "Start a new round"
+  description 'Start a new round'
 
-  argument :game_id, Integer, required: true
-
-  def resolve(game_id:)
+  def resolve
     current_user = context[:current_user]
-    game = current_user.games.find(game_id)
+    game = current_user.current_game.game
+
+    if game.current_round.started? || game.current_round.winner.nil?
+      raise GraphQL::ExecutionError, 'Current round still in progress.'
+    end
+
     game.current_round.end!
     game.start_round!
     game

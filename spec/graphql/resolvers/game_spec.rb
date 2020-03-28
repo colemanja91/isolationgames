@@ -9,7 +9,7 @@ RSpec.describe Resolvers::Game do
   let(:query) do
     <<-GRAPHQL
       {
-        game(id: #{game.id}) {
+        game {
           id
           currentRound {
             blackCard {
@@ -91,16 +91,6 @@ RSpec.describe Resolvers::Game do
         result = IsolationgamesSchema.execute(query, context: { current_user: user })
         expect(result['errors']).not_to be_nil
       end
-    end
-  end
-
-  context 'game is ended' do
-    it 'errors' do
-      user.join_game!(game)
-      game.update!(status: :started)
-      game.update!(status: :ended)
-      result = IsolationgamesSchema.execute(query, context: { current_user: user })
-      expect(result['errors']).not_to be_nil
     end
   end
 end

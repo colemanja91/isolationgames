@@ -11,6 +11,7 @@ class Game < ApplicationRecord
 
   validates :user, presence: true
   validates :name, presence: true, uniqueness: true
+  validate :only_one_active_per_user, on: :create
 
   scope :active, -> { where(status: %i[created started]) }
 
@@ -48,9 +49,7 @@ class Game < ApplicationRecord
   def check_status!
     return unless started?
 
-    if user_games.joined.count < MIN_PLAYERS
-      self.end!
-    end
+    end! if user_games.joined.count < MIN_PLAYERS
   end
 
   def end_user_games!
@@ -65,5 +64,9 @@ class Game < ApplicationRecord
 
   def minimum_players?
     user_games.count >= MIN_PLAYERS
+  end
+
+  def only_one_active_per_user
+    user.current_game.nil?
   end
 end

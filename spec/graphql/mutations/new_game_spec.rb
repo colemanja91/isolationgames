@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Mutations::NewGame do
@@ -18,14 +20,20 @@ RSpec.describe Mutations::NewGame do
   end
 
   it 'returns the game' do
-    result = mutation["data"][mutation_name]
-    expect(Game.find(result["id"]).name).to eq(result["name"])
+    result = mutation['data'][mutation_name]
+    expect(Game.find(result['id']).name).to eq(result['name'])
   end
 
   it 'joins the user to the game' do
-    result = mutation["data"][mutation_name]
-    game = Game.find(result["id"])
+    result = mutation['data'][mutation_name]
+    game = Game.find(result['id'])
 
     expect(user.user_games.find_by(game: game)).not_to be_nil
+  end
+
+  it 'raises an error if the user is already in another game' do
+    create(:game, user: user, as_status: 'started')
+    result = mutation
+    expect(result['errors']).not_to be_nil
   end
 end

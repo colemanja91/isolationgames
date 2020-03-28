@@ -3,11 +3,9 @@ class Mutations::StartGame < Types::BaseMutation
 
   description "Start an existing game"
 
-  argument :game_id, Integer, required: true
-
-  def resolve(game_id:)
+  def resolve
     current_user = context[:current_user]
-    game = current_user.games.find(game_id)
+    game = current_user.current_game.game
     game.start!
     game.reload
     game
