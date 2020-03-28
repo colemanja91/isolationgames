@@ -1,35 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { Link as RouterLink } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 import "../../assets/stylesheets/components/NavBar.scss";
 
 function NavBar() {
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand>
-        <Link to="/">Isolation Games</Link>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav fill variant="pills" className="mr-auto" defaultActiveKey="/">
-          <NavItem href="/">
-            <Nav.Link as={Link} to="/" eventKey="/">
-              Game
-            </Nav.Link>
-          </NavItem>
-          <NavItem href="/how-to-play">
-            <Nav.Link as={Link} to="/how-to-play" eventKey="how-to-play">
-              How to play
-            </Nav.Link>
-          </NavItem>
-          <NavItem href="/about">
-            <Nav.Link as={Link} to="/about" eventKey="about">
-              About
-            </Nav.Link>
-          </NavItem>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <AppBar position="static">
+      <Toolbar className="toolbar">
+        <Typography variant="h4" className="title">
+          <Link component={RouterLink} to="/" color="textPrimary">
+            Isolation Games
+          </Link>
+        </Typography>
+        <Typography variant="h6" className="title">
+          <Link component={RouterLink} to="/" color="textPrimary">
+            Game
+          </Link>
+        </Typography>
+        <Typography variant="h6" className="title">
+          <Link component={RouterLink} to="/how-to-play" color="textPrimary">
+            How to play
+          </Link>
+        </Typography>
+        <Typography variant="h6" className="title">
+          <Link component={RouterLink} to="/about" color="textPrimary">
+            About
+          </Link>
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 }
 
