@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Types::UserRoundType < Types::BaseObject
   field :id, Integer, null: false
   field :user, Types::UserType, null: false

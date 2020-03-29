@@ -104,6 +104,7 @@ export const GAME = gql`
       name
       players {
         id
+        isJudge
         isOwner
         status
         userDisplayName

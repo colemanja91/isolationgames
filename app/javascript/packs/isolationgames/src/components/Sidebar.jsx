@@ -9,21 +9,14 @@ import VideoLink from "./VideoLink";
 import "../../assets/stylesheets/components/Sidebar.scss";
 
 function Sidebar({ gameData, userData }) {
-  const {
-    enoughPlayers,
-    isOwner,
-    name,
-    players,
-    status,
-    videoLink
-  } = gameData.game;
+  const { enoughPlayers, isOwner, status, videoLink } = gameData.game;
 
   return (
     <div className="sidebar">
       <List disablePadding dense>
         <SidebarUser user={userData.user} />
         <Divider style={{ margin: "12px 0" }} />
-        <SidebarPlayerList players={players} name={name} />
+        <SidebarPlayerList game={gameData.game} />
         <Divider style={{ margin: "12px 0" }} />
         <ListItem className="sidebar-item">
           <VideoLink isOwner={isOwner} videoLink={videoLink} />
