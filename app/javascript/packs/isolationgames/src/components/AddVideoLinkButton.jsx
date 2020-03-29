@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
-import { UPDATE_USER_NAME } from "../../apollo";
+import { ADD_VIDEO_LINK } from "../../apollo";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,11 +8,14 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import "../../assets/stylesheets/components/ChangeDisplayName.scss";
 
-export default function ChangeDisplayName({ user }) {
+function AddVideoLinkButton({ videoLink }) {
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState(user.displayName);
+  const [newVideoLink, setNewVideoLink] = useState(videoLink);
+
+  const buttonText = () => {
+    return videoLink ? "Change" : "Add video chat link";
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,10 +26,10 @@ export default function ChangeDisplayName({ user }) {
   };
 
   const handleChange = e => {
-    setName(e.target.value);
+    setNewVideoLink(e.target.value);
   };
 
-  const [updateName, { loading, error }] = useMutation(UPDATE_USER_NAME, {
+  const [addVideoLink, { loading, error }] = useMutation(ADD_VIDEO_LINK, {
     onCompleted() {
       handleClose();
       window.location.reload(false);
@@ -34,33 +37,36 @@ export default function ChangeDisplayName({ user }) {
   });
 
   const submit = () => {
-    updateName({
-      variables: { name }
+    addVideoLink({
+      variables: { videoLink: newVideoLink }
     });
   };
 
   return (
     <div>
       <Button color="primary" onClick={handleClickOpen}>
-        Change Name
+        {buttonText()}
       </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Change display name</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          Add/Update video chat link
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            This is how other people will see you.
+            This game is a lot more enjoyable when you can see everyone's ugly
+            faces.
           </DialogContentText>
           <TextField
             autoFocus
-            defaultValue={user.displayName}
-            helperText={`Default: ${user.email}`}
+            defaultValue={videoLink}
+            helperText="e.g. https://zoom.us/j/123456789"
             margin="dense"
-            id="name"
-            label="Display Name"
+            id="videoLink"
+            label="Video Link"
             onChange={handleChange}
             type="string"
             fullWidth
@@ -78,3 +84,5 @@ export default function ChangeDisplayName({ user }) {
     </div>
   );
 }
+
+export default AddVideoLinkButton;

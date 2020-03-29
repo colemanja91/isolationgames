@@ -9,6 +9,7 @@ import GameLink from "./GameLink";
 import LeaveGameButton from "./LeaveGameButton";
 import SidebarPlayer from "./SidebarPlayer";
 import StartGameButton from "./StartGameButton";
+import VideoLink from "./VideoLink";
 import "../../assets/stylesheets/components/Sidebar.scss";
 
 function Sidebar({ gameData, userData }) {
@@ -28,8 +29,6 @@ function Sidebar({ gameData, userData }) {
         <Typography variant="h4">Playing as:</Typography>
         <ListItem className="sidebar-item">
           <Typography>{displayName} </Typography>
-        </ListItem>
-        <ListItem className="sidebar-item">
           <ChangeDisplayName user={userData.user} />
         </ListItem>
         <ListItem className="sidebar-item">
@@ -37,19 +36,20 @@ function Sidebar({ gameData, userData }) {
             Email: <i>{email}</i>
           </Typography>
         </ListItem>
-        <ListItem className="sidebar-item">
-          <LeaveGameButton />
-        </ListItem>
         <Divider style={{ margin: "12px 0" }} />
         <Typography variant="h4">Players ({players.length}):</Typography>
-        <ListItem className="sidebar-item">
-          <GameLink name={name} />
-        </ListItem>
         {players.map((player, index) => (
           <Fragment key={`sidebar-player-${index}`}>
             <SidebarPlayer player={player} />
           </Fragment>
         ))}
+        <ListItem className="sidebar-item">
+          <GameLink name={name} />
+        </ListItem>
+        <Divider style={{ margin: "12px 0" }} />
+        <ListItem className="sidebar-item">
+          <VideoLink isOwner={isOwner} videoLink={videoLink} />
+        </ListItem>
         <Divider style={{ margin: "12px 0" }} />
         <ListItem className="sidebar-item">
           {isOwner && status == "created" && enoughPlayers ? (
@@ -57,10 +57,10 @@ function Sidebar({ gameData, userData }) {
           ) : null}
         </ListItem>
         <ListItem className="sidebar-item">
+          <LeaveGameButton />
           {isOwner ? (
             <Fragment>
               <EndGameButton />
-              <Divider style={{ margin: "12px 0" }} />
             </Fragment>
           ) : null}
         </ListItem>

@@ -45,6 +45,15 @@ export const START_GAME = gql`
   }
 `;
 
+export const ADD_VIDEO_LINK = gql`
+  mutation AddVideoLink($videoLink: String!) {
+    addVideoLink(videoLink: $videoLink) {
+      id
+      videoLink
+    }
+  }
+`;
+
 export const UPDATE_USER_NAME = gql`
   mutation UpdateUserName($name: String!) {
     updateUserName(name: $name) {
