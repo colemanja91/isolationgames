@@ -8,7 +8,10 @@ import "../../assets/stylesheets/components/GameButton.scss";
 
 function Home() {
   const { loading: gameLoading, error: gameError, data: gameData } = useQuery(
-    GAME
+    GAME,
+    {
+      //pollInterval: 5000
+    }
   );
   const { loading: userLoading, error: userError, data: userData } = useQuery(
     USER

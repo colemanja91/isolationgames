@@ -12,6 +12,7 @@
     "@rails/webpacker": "5.0.1",
     "apollo-boost": "^0.4.7",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "clipboard-copy": "^3.1.0",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
     "node-sass": "^4.13.1",

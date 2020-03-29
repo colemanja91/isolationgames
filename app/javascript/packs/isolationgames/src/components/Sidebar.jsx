@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ChangeDisplayName from "./ChangeDisplayName";
 import EndGameButton from "./EndGameButton";
+import GameLink from "./GameLink";
 import LeaveGameButton from "./LeaveGameButton";
 import SidebarPlayer from "./SidebarPlayer";
 import StartGameButton from "./StartGameButton";
@@ -41,6 +42,9 @@ function Sidebar({ gameData, userData }) {
         </ListItem>
         <Divider style={{ margin: "12px 0" }} />
         <Typography variant="h4">Players ({players.length}):</Typography>
+        <ListItem className="sidebar-item">
+          <GameLink name={name} />
+        </ListItem>
         {players.map((player, index) => (
           <Fragment key={`sidebar-player-${index}`}>
             <SidebarPlayer player={player} />
