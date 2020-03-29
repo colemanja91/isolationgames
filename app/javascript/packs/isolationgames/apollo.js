@@ -21,6 +21,14 @@ export const JOIN_GAME = gql`
   }
 `;
 
+export const LEAVE_GAME = gql`
+  mutation LeaveGame {
+    leaveGame {
+      id
+    }
+  }
+`;
+
 export const UPDATE_USER_NAME = gql`
   mutation UpdateUserName($name: String!) {
     updateUserName(name: $name) {
