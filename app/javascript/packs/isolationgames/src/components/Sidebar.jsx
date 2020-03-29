@@ -9,6 +9,7 @@ import GameLink from "./GameLink";
 import LeaveGameButton from "./LeaveGameButton";
 import SidebarPlayer from "./SidebarPlayer";
 import StartGameButton from "./StartGameButton";
+import VideoLink from "./VideoLink";
 import "../../assets/stylesheets/components/Sidebar.scss";
 
 function Sidebar({ gameData, userData }) {
@@ -44,6 +45,10 @@ function Sidebar({ gameData, userData }) {
         ))}
         <ListItem className="sidebar-item">
           <GameLink name={name} />
+        </ListItem>
+        <Divider style={{ margin: "12px 0" }} />
+        <ListItem className="sidebar-item">
+          <VideoLink isOwner={isOwner} videoLink={videoLink} />
         </ListItem>
         <Divider style={{ margin: "12px 0" }} />
         <ListItem className="sidebar-item">
