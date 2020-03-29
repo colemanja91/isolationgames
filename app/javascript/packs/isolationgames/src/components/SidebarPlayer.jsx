@@ -1,16 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
+import Chip from "@material-ui/core/Chip";
 //import "../../assets/stylesheets/components/SidebarPlayer.scss";
 
 function SidebarPlayer({ player, index }) {
   return (
     <ListItem className="sidebar-item">
       {player.isOwner ? (
-        <Badge badgeContent="GAME OWNER" color="primary">
+        <Fragment>
           <Typography>{player.userDisplayName}</Typography>
-        </Badge>
+          <Chip label="Game Owner" />
+        </Fragment>
       ) : (
         <Typography>
           {player.status == "left" ? (
