@@ -13,6 +13,14 @@ export const NEW_GAME = gql`
   }
 `;
 
+export const END_GAME = gql`
+  mutation EndGame {
+    endGame {
+      id
+    }
+  }
+`;
+
 export const JOIN_GAME = gql`
   mutation JoinGame($gameName: String!) {
     joinGame(gameName: $gameName) {
