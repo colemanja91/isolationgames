@@ -36,11 +36,7 @@ function GameLink({ name }) {
           disableTouchListener
           title="Link copied!"
         >
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={handleButtonClick}
-          >
+          <Button color="primary" onClick={handleButtonClick}>
             Copy invite link
           </Button>
         </Tooltip>

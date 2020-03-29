@@ -37,14 +37,14 @@ function Sidebar({ gameData, userData }) {
         </ListItem>
         <Divider style={{ margin: "12px 0" }} />
         <Typography variant="h4">Players ({players.length}):</Typography>
-        <ListItem className="sidebar-item">
-          <GameLink name={name} />
-        </ListItem>
         {players.map((player, index) => (
           <Fragment key={`sidebar-player-${index}`}>
             <SidebarPlayer player={player} />
           </Fragment>
         ))}
+        <ListItem className="sidebar-item">
+          <GameLink name={name} />
+        </ListItem>
         <Divider style={{ margin: "12px 0" }} />
         <ListItem className="sidebar-item">
           {isOwner && status == "created" && enoughPlayers ? (
@@ -56,7 +56,6 @@ function Sidebar({ gameData, userData }) {
           {isOwner ? (
             <Fragment>
               <EndGameButton />
-              <Divider style={{ margin: "12px 0" }} />
             </Fragment>
           ) : null}
         </ListItem>
