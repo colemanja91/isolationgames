@@ -32,7 +32,7 @@ function LeaveGameButton() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
         Leave Game
       </Button>
       <Dialog

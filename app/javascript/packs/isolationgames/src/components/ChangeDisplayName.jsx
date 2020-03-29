@@ -41,7 +41,7 @@ export default function ChangeDisplayName({ user }) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button color="primary" onClick={handleClickOpen}>
         Change Name
       </Button>
       <Dialog

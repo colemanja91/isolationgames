@@ -28,17 +28,12 @@ function Sidebar({ gameData, userData }) {
         <Typography variant="h4">Playing as:</Typography>
         <ListItem className="sidebar-item">
           <Typography>{displayName} </Typography>
-        </ListItem>
-        <ListItem className="sidebar-item">
           <ChangeDisplayName user={userData.user} />
         </ListItem>
         <ListItem className="sidebar-item">
           <Typography>
             Email: <i>{email}</i>
           </Typography>
-        </ListItem>
-        <ListItem className="sidebar-item">
-          <LeaveGameButton />
         </ListItem>
         <Divider style={{ margin: "12px 0" }} />
         <Typography variant="h4">Players ({players.length}):</Typography>
@@ -57,6 +52,7 @@ function Sidebar({ gameData, userData }) {
           ) : null}
         </ListItem>
         <ListItem className="sidebar-item">
+          <LeaveGameButton />
           {isOwner ? (
             <Fragment>
               <EndGameButton />
