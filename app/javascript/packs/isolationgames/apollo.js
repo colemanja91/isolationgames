@@ -37,6 +37,14 @@ export const LEAVE_GAME = gql`
   }
 `;
 
+export const START_GAME = gql`
+  mutation StartGame {
+    startGame {
+      id
+    }
+  }
+`;
+
 export const UPDATE_USER_NAME = gql`
   mutation UpdateUserName($name: String!) {
     updateUserName(name: $name) {
@@ -59,7 +67,31 @@ export const USER = gql`
 export const GAME = gql`
   query Game {
     game {
+      enoughPlayers
       isOwner
+      currentRound {
+        blackCard {
+          text
+          pick
+        }
+        isJudge
+        round
+        status
+        userRounds {
+          id
+          user {
+            displayName
+          }
+          userCards {
+            text
+          }
+          winner
+        }
+      }
+      hand {
+        id
+        text
+      }
       name
       players {
         id

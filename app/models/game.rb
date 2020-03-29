@@ -30,7 +30,7 @@ class Game < ApplicationRecord
     state :ended
 
     event :start do
-      transitions from: :created, to: :started, guard: :minimum_players?, after: :start_round!
+      transitions from: :created, to: :started, guard: :enough_players, after: :start_round!
     end
 
     event :end do
@@ -61,14 +61,14 @@ class Game < ApplicationRecord
     user_games.joined.each(&:leave!)
   end
 
+  def enough_players
+    user_games.joined.count >= MIN_PLAYERS
+  end
+
   private
 
   def set_name
     self.name = Haikunator.haikunate
-  end
-
-  def minimum_players?
-    user_games.count >= MIN_PLAYERS
   end
 
   def only_one_active_per_user

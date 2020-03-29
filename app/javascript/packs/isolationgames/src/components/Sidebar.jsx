@@ -7,14 +7,15 @@ import ChangeDisplayName from "./ChangeDisplayName";
 import EndGameButton from "./EndGameButton";
 import LeaveGameButton from "./LeaveGameButton";
 import SidebarPlayer from "./SidebarPlayer";
+import StartGameButton from "./StartGameButton";
 import "../../assets/stylesheets/components/Sidebar.scss";
 
 function Sidebar({ gameData, userData }) {
   const {
+    enoughPlayers,
     isOwner,
     name,
     players,
-    startedAt,
     status,
     videoLink
   } = gameData.game;
@@ -46,12 +47,19 @@ function Sidebar({ gameData, userData }) {
           </Fragment>
         ))}
         <Divider style={{ margin: "12px 0" }} />
-        {isOwner ? (
-          <Fragment>
-            <EndGameButton />
-            <Divider style={{ margin: "12px 0" }} />
-          </Fragment>
-        ) : null}
+        <ListItem className="sidebar-item">
+          {isOwner && status == "created" && enoughPlayers ? (
+            <StartGameButton />
+          ) : null}
+        </ListItem>
+        <ListItem className="sidebar-item">
+          {isOwner ? (
+            <Fragment>
+              <EndGameButton />
+              <Divider style={{ margin: "12px 0" }} />
+            </Fragment>
+          ) : null}
+        </ListItem>
       </List>
     </div>
   );

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class Types::GameType < Types::BaseObject
   field :id, Integer, null: false
+  field :enough_players, Boolean, null: false
   field :is_owner, Boolean, null: false
   field :current_round, Types::GameRoundType, null: true
   field :game_owner, Types::UserType, null: false
