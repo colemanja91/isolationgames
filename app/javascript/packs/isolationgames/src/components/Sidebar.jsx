@@ -4,6 +4,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ChangeDisplayName from "./ChangeDisplayName";
+import EndGameButton from "./EndGameButton";
 import LeaveGameButton from "./LeaveGameButton";
 import SidebarPlayer from "./SidebarPlayer";
 import "../../assets/stylesheets/components/Sidebar.scss";
@@ -45,6 +46,12 @@ function Sidebar({ gameData, userData }) {
           </Fragment>
         ))}
         <Divider style={{ margin: "12px 0" }} />
+        {isOwner ? (
+          <Fragment>
+            <EndGameButton />
+            <Divider style={{ margin: "12px 0" }} />
+          </Fragment>
+        ) : null}
       </List>
     </div>
   );
