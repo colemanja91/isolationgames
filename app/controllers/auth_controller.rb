@@ -9,7 +9,7 @@ class AuthController < ApplicationController
     @resp = auth_code(params[:code])
     redirect_to '/' && return unless resp
 
-    session[:cognito_session_id] = user.id
+    session[:current_user_id] = user.id
 
     redirect_to '/'
   end
@@ -23,6 +23,8 @@ class AuthController < ApplicationController
   private
 
   def user
+    return User.local_account if Rails.env.development?
+
     User.find_by(subscriber: resp.id_token[:sub]).first ||
       User.create!(subscriber: resp.id_token[:sub], email: resp.id_token[:email])
   end
