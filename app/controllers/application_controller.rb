@@ -10,13 +10,11 @@ class ApplicationController < ActionController::Base
     local_signin && return if Rails.env.development?
 
     @is_signed_in = false
-    @current_user = nil
+    @current_user = User.find_by_id(session[:current_user_id])
 
-    unauthorized unless session[:current_user_id]
-    # Need to refresh token
+    unauthorized unless @current_user
 
     @is_signed_in = true
-    @current_user = User.find(session[:current_user_id])
   end
 
   private
