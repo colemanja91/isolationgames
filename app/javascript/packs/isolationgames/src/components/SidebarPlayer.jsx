@@ -6,11 +6,11 @@ import Chip from "@material-ui/core/Chip";
 function SidebarPlayer({ player }) {
   const chips = () => {
     return (
-      <Fragment>
+      <div>
         {player.isOwner ? <Chip label="Game Owner" color="primary" /> : null}
         {player.isJudge ? <Chip label="Judge" color="secondary" /> : null}
         {player.status == "left" ? <Chip label="left" /> : null}
-      </Fragment>
+      </div>
     );
   };
 
@@ -20,10 +20,10 @@ function SidebarPlayer({ player }) {
 
   return (
     <ListItem className="sidebar-item">
-      <Fragment>
+      <div className="sidebar-player-item">
         <Typography color={playerColor()}>{player.userDisplayName}</Typography>
         {chips()}
-      </Fragment>
+      </div>
     </ListItem>
   );
 }
