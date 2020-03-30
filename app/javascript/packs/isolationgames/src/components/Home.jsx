@@ -23,7 +23,7 @@ function Home() {
   return (
     <div className="Home">
       {gameData.game ? (
-        <Game gameData={gameData} userData={userData} />
+        <Game game={gameData.game} user={userData.user} />
       ) : (
         <NewGameButton />
       )}
