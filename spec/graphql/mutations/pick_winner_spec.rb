@@ -28,7 +28,7 @@ RSpec.describe Mutations::PickWinner do
   end
 
   def play_cards
-    game.user_games.each do |user_game|
+    game.user_games.where.not(user_id: game.current_round.user.id).each do |user_game|
       pick = game.current_round.black_card.pick
       card_ids = user_game.hand.sample(pick).pluck(:id)
       user_game.play_cards(card_ids)
