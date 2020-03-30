@@ -8,15 +8,15 @@ import SidebarUser from "./SidebarUser";
 import VideoLink from "./VideoLink";
 import "../../assets/stylesheets/components/Sidebar.scss";
 
-function Sidebar({ gameData, userData }) {
-  const { enoughPlayers, isOwner, status, videoLink } = gameData.game;
+function Sidebar({ game, user }) {
+  const { enoughPlayers, isOwner, status, videoLink } = game;
 
   return (
     <div className="sidebar">
       <List disablePadding dense>
-        <SidebarUser user={userData.user} />
+        <SidebarUser user={user} />
         <Divider style={{ margin: "12px 0" }} />
-        <SidebarPlayerList game={gameData.game} />
+        <SidebarPlayerList game={game} />
         <Divider style={{ margin: "12px 0" }} />
         <ListItem className="sidebar-item">
           <VideoLink isOwner={isOwner} videoLink={videoLink} />
