@@ -40,7 +40,7 @@ class GameRound < ApplicationRecord
   end
 
   def check_status!
-    submit! if user_rounds.count == game.user_games.joined.count
+    submit! if user_rounds.count == (game.user_games.joined.count - 1)
   end
 
   def winner
@@ -85,6 +85,6 @@ class GameRound < ApplicationRecord
   def only_one_in_progress_round
     return true unless game.game_rounds.in_progress.present?
 
-    errors.add(:game, "round is still in progress!")
+    errors.add(:game, 'round is still in progress!')
   end
 end
