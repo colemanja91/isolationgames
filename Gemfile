@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
-git_source(:github) { |repo| 'https://github.com/colemanja91/isolationgames.git' }
+git_source(:github) { |_repo| 'https://github.com/colemanja91/isolationgames.git' }
 
 ruby '2.6.5'
 
@@ -14,11 +16,13 @@ gem 'aws-sdk-sns'
 gem 'excon'
 gem 'graphql'
 gem 'haikunator'
+gem 'hiredis'
 gem 'json-jwt'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 gem 'react-rails'
+gem 'redis'
 gem 'webpacker'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -26,7 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec'
@@ -44,6 +48,6 @@ end
 
 group :test do
   gem 'rails-controller-testing'
-  gem 'rspec_junit_formatter'
   gem 'rspec-deep-ignore-order-matcher'
+  gem 'rspec_junit_formatter'
 end

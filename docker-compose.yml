@@ -1,5 +1,5 @@
-version: '2'
- 
+version: "2"
+
 services:
   postgres:
     image: circleci/postgres:10.6-alpine-postgis
