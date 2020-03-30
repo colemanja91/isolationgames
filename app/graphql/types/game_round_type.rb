@@ -14,8 +14,12 @@ class Types::GameRoundType < Types::BaseObject
     @object
   end
 
+  def current_user
+    @context[:current_user]
+  end
+
   def is_judge
-    @current_user == game_round.user
+    current_user == game_round.user
   end
 
   def user_rounds
