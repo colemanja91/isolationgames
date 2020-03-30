@@ -8,14 +8,7 @@ RSpec.describe GraphqlController, type: :controller do
 
   describe 'POST /graphql' do
     it 'works if user has a session' do
-      session = user.cognito_sessions.create!(
-        expire_time: Time.now.tv_sec + 3600,
-        issued_at: Time.now.tv_sec,
-        audience: 'test',
-        refresh_token: 'token'
-      )
-
-      post :execute, params: { query: query }, session: { cognito_session_id: session.id }
+      post :execute, params: { query: query }, session: { current_user_id: user.id }
 
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)['data']['user']['id'].to_i).to eq(user.id)
