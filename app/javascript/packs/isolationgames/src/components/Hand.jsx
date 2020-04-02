@@ -19,6 +19,12 @@ function Hand({ hand, pick }) {
     return selectedCards.length == pick ? false : true;
   };
 
+  const buttonText = () => {
+    return selectedCards.length == pick
+      ? "SUBMIT"
+      : `PICK (${pick - selectedCards.length} REMAINING)`;
+  };
+
   return (
     <Fragment>
       <Grid container direction="column" alignItems="center">
@@ -28,7 +34,7 @@ function Hand({ hand, pick }) {
             color="primary"
             disabled={buttonDisabled()}
           >
-            SUBMIT
+            {buttonText()}
           </Button>
         </Grid>
       </Grid>
