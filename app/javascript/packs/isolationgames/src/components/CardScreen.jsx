@@ -19,7 +19,7 @@ function CardScreen({ game }) {
       <Divider style={{ margin: "12px 0" }} />
       <Grid item>
         {game.currentRound.status == "started" && !game.currentRound.isJudge ? (
-          <Hand hand={game.hand} />
+          <Hand hand={game.hand} pick={game.currentRound.blackCard.pick} />
         ) : null}
       </Grid>
     </Grid>
