@@ -54,6 +54,14 @@ export const ADD_VIDEO_LINK = gql`
   }
 `;
 
+export const PLAY_CARDS = gql`
+  mutation PlayCards($userCardIds: [Int!]!) {
+    playCards(userCardIds: $userCardIds) {
+      id
+    }
+  }
+`;
+
 export const UPDATE_USER_NAME = gql`
   mutation UpdateUserName($name: String!) {
     updateUserName(name: $name) {
@@ -83,6 +91,7 @@ export const GAME = gql`
           text
           pick
         }
+        hasPlayed
         isJudge
         round
         status
