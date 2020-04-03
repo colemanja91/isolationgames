@@ -1,41 +1,24 @@
 import React, { useState, Fragment } from "react";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Card from "./Card";
+import SubmitCardsButton from "./SubmitCardsButton";
 
 function Hand({ hand, pick }) {
   const [selectedCards, setSelectedCards] = useState([]);
 
-  function doSomething(cardId) {
+  function handleCardClick(card) {
     {
-      selectedCards.includes(cardId)
-        ? setSelectedCards(selectedCards.filter(x => x != cardId))
-        : setSelectedCards(selectedCards => [...selectedCards, cardId]);
+      selectedCards.includes(card)
+        ? setSelectedCards(selectedCards.filter(x => x.id != card.id))
+        : setSelectedCards(selectedCards => [...selectedCards, card]);
     }
-    console.log(selectedCards);
   }
-
-  const buttonDisabled = () => {
-    return selectedCards.length == pick ? false : true;
-  };
-
-  const buttonText = () => {
-    return selectedCards.length == pick
-      ? "SUBMIT"
-      : `PICK (${pick - selectedCards.length} REMAINING)`;
-  };
 
   return (
     <Fragment>
       <Grid container direction="column" alignItems="center">
         <Grid item>
-          <Button
-            variant="outlined"
-            color="primary"
-            disabled={buttonDisabled()}
-          >
-            {buttonText()}
-          </Button>
+          <SubmitCardsButton selectedCards={selectedCards} pick={pick} />
         </Grid>
       </Grid>
       <Grid container direction="row" alignItems="flex-start">
@@ -45,7 +28,7 @@ function Hand({ hand, pick }) {
               cardId={card.id}
               text={card.text}
               cardType="white-card"
-              onClick={() => doSomething(card.id)}
+              onClick={() => handleCardClick(card)}
             />
           </Grid>
         ))}
