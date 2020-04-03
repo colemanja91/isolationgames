@@ -29,8 +29,8 @@ export default function ChangeDisplayName({ user }) {
   const [updateName, { loading, error }] = useMutation(UPDATE_USER_NAME, {
     onCompleted() {
       handleClose();
-      window.location.reload(false);
-    }
+    },
+    refetchQueries: ["Game", "User"]
   });
 
   const submit = () => {

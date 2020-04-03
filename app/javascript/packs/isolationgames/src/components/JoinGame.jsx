@@ -9,7 +9,6 @@ function JoinGame() {
 
   const [join, { loading, error }] = useMutation(JOIN_GAME, {
     onCompleted() {
-      console.log("is this being called twice?");
       history.push("/");
     }
   });
