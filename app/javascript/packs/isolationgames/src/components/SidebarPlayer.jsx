@@ -9,6 +9,7 @@ function SidebarPlayer({ player }) {
       <div>
         {player.isOwner ? <Chip label="Game Owner" color="primary" /> : null}
         {player.isJudge ? <Chip label="Judge" color="secondary" /> : null}
+        {player.hasPlayed ? <Chip label="Has played" color="default" /> : null}
         {player.status == "left" ? <Chip label="left" /> : null}
       </div>
     );
