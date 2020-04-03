@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from "react";
+import { useMutation } from "react-apollo";
+import { PLAY_CARDS } from "../../apollo";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -33,6 +35,19 @@ function SubmitCardsButton({ selectedCards, pick }) {
     return selectedCards.length == 1
       ? "Are you sure you want to submit this card?"
       : "Are you sure you want to submit these cards?";
+  };
+
+  const [playCards, { loading, error }] = useMutation(PLAY_CARDS, {
+    onCompleted() {
+      handleClose();
+    },
+    refetchQueries: ["Game"]
+  });
+
+  const submit = () => {
+    playCards({
+      variables: { userCardIds: selectedCards.map(x => x.id) }
+    });
   };
 
   return (
@@ -76,7 +91,7 @@ function SubmitCardsButton({ selectedCards, pick }) {
           <Button onClick={handleClose} color="primary">
             Nevermind
           </Button>
-          <Button color="primary" autoFocus>
+          <Button color="primary" autoFocus onClick={submit}>
             Yes!
           </Button>
         </DialogActions>

@@ -4,6 +4,7 @@ class Types::GameRoundType < Types::BaseObject
   field :id, Integer, null: false
   field :black_card, Types::BlackCardType, null: false
   field :user_rounds, [Types::UserRoundType], null: false
+  field :has_played, Boolean, null: false
   field :is_judge, Boolean, null: false
   field :round, Integer, null: false
   field :status, Types::GameRoundStatusEnum, null: false
@@ -16,6 +17,10 @@ class Types::GameRoundType < Types::BaseObject
 
   def current_user
     @context[:current_user]
+  end
+
+  def has_played
+    game_round.user_rounds.joins(:user_game).where(user_games: { user: current_user }).any?
   end
 
   def is_judge
