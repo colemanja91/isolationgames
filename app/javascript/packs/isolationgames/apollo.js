@@ -2,7 +2,7 @@ import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 
 export const client = new ApolloClient({
-  uri: "/graphql"
+  uri: "/graphql",
 });
 
 export const NEW_GAME = gql`
@@ -113,6 +113,7 @@ export const GAME = gql`
       name
       players {
         id
+        hasPlayed
         isJudge
         isOwner
         status

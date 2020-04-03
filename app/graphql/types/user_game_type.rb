@@ -2,6 +2,7 @@
 
 class Types::UserGameType < Types::BaseObject
   field :id, Integer, null: false
+  field :has_played, Boolean, null: false
   field :is_judge, Boolean, null: false
   field :is_owner, Boolean, null: false
   field :user_display_name, String, null: false
@@ -9,6 +10,10 @@ class Types::UserGameType < Types::BaseObject
 
   def user_game
     @object
+  end
+
+  def has_played
+    user_game.user_rounds.where(game_round: user_game.game.current_round).any?
   end
 
   def is_judge
