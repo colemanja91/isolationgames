@@ -23,8 +23,7 @@ function CardScreen({ game }) {
         !game.currentRound.isJudge &&
         !game.currentRound.hasPlayed ? (
           <Hand hand={game.hand} pick={game.currentRound.blackCard.pick} />
-        ) : game.currentRound.status == "submitted" &&
-          game.currentRound.isJudge ? (
+        ) : game.currentRound.status == "submitted" ? (
           <Submissions round={game.currentRound} />
         ) : null}
       </Grid>
