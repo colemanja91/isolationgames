@@ -4,6 +4,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Card from "./Card";
 import Hand from "./Hand";
+import Submissions from "./Submissions";
 
 function CardScreen({ game }) {
   return (
@@ -22,6 +23,8 @@ function CardScreen({ game }) {
         !game.currentRound.isJudge &&
         !game.currentRound.hasPlayed ? (
           <Hand hand={game.hand} pick={game.currentRound.blackCard.pick} />
+        ) : game.currentRound.status == "submitted" ? (
+          <Submissions round={game.currentRound} />
         ) : null}
       </Grid>
     </Grid>
