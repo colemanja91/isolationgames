@@ -2,7 +2,7 @@ version: "2"
 
 services:
   postgres:
-    image: circleci/postgres:10.6-alpine-postgis
+    image: circleci/postgres:10.7-alpine-postgis
     restart: always
     container_name: isolation-postgres
     ports:
