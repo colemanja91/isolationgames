@@ -25,6 +25,7 @@ class Game < ApplicationRecord
   }
 
   aasm column: :status, enum: true, whiny_persistance: true do
+    after_all_transitions :track_transition
     state :created, initial: true
     state :started
     state :ended
@@ -73,5 +74,10 @@ class Game < ApplicationRecord
 
   def only_one_active_per_user
     user.current_game.nil?
+  end
+
+  def track_transition
+    timestamp_setter = "#{aasm.to_state}_at="
+    public_send(timestamp_setter, Time.current) if respond_to?(timestamp_setter)
   end
 end

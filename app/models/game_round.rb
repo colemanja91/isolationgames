@@ -26,6 +26,7 @@ class GameRound < ApplicationRecord
   }
 
   aasm column: :status, enum: true, whiny_persistance: true do
+    after_all_transitions :track_transition
     state :started, initial: true
     state :submitted
     state :ended
@@ -86,5 +87,10 @@ class GameRound < ApplicationRecord
     return true unless game.game_rounds.in_progress.present?
 
     errors.add(:game, 'round is still in progress!')
+  end
+
+  def track_transition
+    timestamp_setter = "#{aasm.to_state}_at="
+    public_send(timestamp_setter, Time.current) if respond_to?(timestamp_setter)
   end
 end
