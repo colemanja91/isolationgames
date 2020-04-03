@@ -22,8 +22,8 @@ function StartGameButton() {
   const [startGame, { loading, error }] = useMutation(START_GAME, {
     onCompleted() {
       handleClose();
-      window.location.reload(false);
-    }
+    },
+    refetchQueries: ["Game"]
   });
 
   const submit = () => {

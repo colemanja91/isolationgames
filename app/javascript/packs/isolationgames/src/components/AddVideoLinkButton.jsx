@@ -33,7 +33,8 @@ function AddVideoLinkButton({ videoLink }) {
     onCompleted() {
       handleClose();
       window.location.reload(false);
-    }
+    },
+    refetchQueries: ["Game"]
   });
 
   const submit = () => {
