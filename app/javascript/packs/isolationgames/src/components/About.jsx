@@ -55,10 +55,11 @@ function About() {
           accounts.
         </li>
         <li>
-          We may track basic information such as IP address, device type, and
-          app activity for the purpose of building a better game.
+          We may track basic information such as device type, and app activity
+          for the purpose of building a slightly less shitty game.
         </li>
         <li>We will never email you about anything.</li>
+        <li>We will never sell your email address.</li>
         <li>
           Children under 13 are not allowed to use this site (recommended age is
           17+).
