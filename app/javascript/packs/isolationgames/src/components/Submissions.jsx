@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import Grid from "@material-ui/core/Grid";
 import Card from "./Card";
+import StartNewRoundButton from "./StartNewRoundButton";
 import SubmitWinnerButton from "./SubmitWinnerButton";
 
 function Submissions({ round }) {
@@ -23,7 +24,11 @@ function Submissions({ round }) {
   return (
     <Fragment>
       <Grid container direction="column" alignItems="center">
-        {round.winner ? null : (
+        {round.winner ? (
+          <Grid item>
+            <StartNewRoundButton />
+          </Grid>
+        ) : (
           <Grid item>
             <SubmitWinnerButton winner={winner} />
           </Grid>
