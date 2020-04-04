@@ -34,6 +34,6 @@ class Types::GameType < Types::BaseObject
   end
 
   def hand
-    current_user.current_game.hand
+    current_user.current_game.hand.order(id: :desc)
   end
 end

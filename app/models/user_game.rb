@@ -59,6 +59,7 @@ class UserGame < ApplicationRecord
     cards = hand.where(id: user_card_ids)
     user_round = user_rounds.create!(game_round: game.current_round)
     cards.update_all(user_round_id: user_round.id)
+    cards.each(&:play!)
 
     game.current_round.check_status!
   end

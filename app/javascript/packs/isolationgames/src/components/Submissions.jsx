@@ -38,7 +38,9 @@ function Submissions({ round }) {
         {round.userRounds.map((userRound) => (
           <Grid item key={`user-round-${userRound.id}`}>
             <Card
-              text={userRound.userCards.map((x) => x.text).join("/n/nAND/n/n")}
+              text={userRound.userCards
+                .map((x) => x.text)
+                .join("<br><br>AND<br><br>")}
               isWinner={userRound.winner}
               cardType="white-card"
               onClick={() => handleCardClick(userRound)}

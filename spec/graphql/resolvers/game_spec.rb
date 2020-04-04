@@ -82,7 +82,7 @@ RSpec.describe Resolvers::Game do
 
       it "returns the user's hand" do
         result = IsolationgamesSchema.execute(query, context: { current_user: user })['data']['game']
-        expect(result['hand'].pluck('id')).to eq(user.user_games.first.hand.pluck(:id))
+        expect(result['hand'].pluck('id')).to eq(user.user_games.first.hand.order(id: :desc).pluck(:id))
       end
     end
 

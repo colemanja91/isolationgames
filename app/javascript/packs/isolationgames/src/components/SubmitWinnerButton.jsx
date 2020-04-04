@@ -31,7 +31,7 @@ function SubmitWinnerButton({ winner }) {
 
   const winnerText = () => {
     return winner
-      ? winner.userCards.map((x) => x.text).join("/n/nAND/n/n")
+      ? winner.userCards.map((x) => x.text).join("<br><br>AND<br><br>")
       : null;
   };
 
