@@ -25,21 +25,20 @@ function AddVideoLinkButton({ videoLink }) {
     setOpen(false);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setNewVideoLink(e.target.value);
   };
 
   const [addVideoLink, { loading, error }] = useMutation(ADD_VIDEO_LINK, {
     onCompleted() {
       handleClose();
-      window.location.reload(false);
     },
-    refetchQueries: ["Game"]
+    refetchQueries: ["Game"],
   });
 
   const submit = () => {
     addVideoLink({
-      variables: { videoLink: newVideoLink }
+      variables: { videoLink: newVideoLink },
     });
   };
 
