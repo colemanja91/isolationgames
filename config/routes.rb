@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'auth/sign_in', to: 'auth#signin'
   get 'auth/sign_out', to: 'auth#signout'
 
+  get '/about-public', to: 'index#about'
+
   root to: 'index#index'
   match '*path', to: 'index#index', via: :all
 end

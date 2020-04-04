@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   before_action :check_signed_in
 
   def check_signed_in
+    return if request.fullpath == '/about-public'
+
     local_signin && return if Rails.env.development?
 
     @is_signed_in = false
