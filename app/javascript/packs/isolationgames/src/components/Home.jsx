@@ -10,7 +10,7 @@ function Home() {
   const { loading: gameLoading, error: gameError, data: gameData } = useQuery(
     GAME,
     {
-      //pollInterval: 5000
+      pollInterval: 5000,
     }
   );
   const { loading: userLoading, error: userError, data: userData } = useQuery(

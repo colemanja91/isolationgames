@@ -59,7 +59,7 @@ class GameRound < ApplicationRecord
   # pick a random black card which
   # has not yet been played in this game
   def set_black_card
-    black_deck = BlackCard.where.not(id: game.game_rounds.pluck(:id))
+    black_deck = BlackCard.where.not(id: game.game_rounds.pluck(:black_card_id))
     offset = rand(black_deck.count)
     self.black_card = black_deck.offset(offset).first
   end
