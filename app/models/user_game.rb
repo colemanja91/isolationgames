@@ -12,6 +12,8 @@ class UserGame < ApplicationRecord
   validates_uniqueness_of :game, scope: :user
   validate :only_one_active_per_user
 
+  after_commit :check_cards
+
   CARDS = 10
 
   enum status: {
@@ -25,7 +27,7 @@ class UserGame < ApplicationRecord
     state :left
 
     event :join do
-      transitions from: :left, to: :joined
+      transitions from: :left, to: :joined, after: :check_cards
     end
 
     event :leave do
@@ -34,7 +36,7 @@ class UserGame < ApplicationRecord
   end
 
   def draw_cards
-    draw_card while user_cards.count < CARDS
+    draw_card while hand.count < CARDS
   end
 
   def hand
@@ -62,6 +64,10 @@ class UserGame < ApplicationRecord
   end
 
   private
+
+  def check_cards
+    draw_cards if game.started?
+  end
 
   def draw_card
     UserCard.transaction do

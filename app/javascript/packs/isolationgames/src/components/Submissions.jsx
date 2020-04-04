@@ -8,7 +8,7 @@ function Submissions({ round }) {
   const [winner, setWinner] = useState();
 
   const cardsDisabled = () => {
-    return round.winner ? true : false;
+    return round.winner || !round.isJudge ? true : false;
   };
 
   function handleCardClick(userRound) {
@@ -24,15 +24,15 @@ function Submissions({ round }) {
   return (
     <Fragment>
       <Grid container direction="column" alignItems="center">
-        {round.winner ? (
+        {round.winner && round.isJudge ? (
           <Grid item>
             <StartNewRoundButton />
           </Grid>
-        ) : (
+        ) : round.isJudge ? (
           <Grid item>
             <SubmitWinnerButton winner={winner} />
           </Grid>
-        )}
+        ) : null}
       </Grid>
       <Grid container direction="row" alignItems="flex-start">
         {round.userRounds.map((userRound) => (
