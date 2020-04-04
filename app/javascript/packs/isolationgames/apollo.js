@@ -54,6 +54,14 @@ export const ADD_VIDEO_LINK = gql`
   }
 `;
 
+export const PICK_WINNER = gql`
+  mutation PickWinner($userRoundId: Int!) {
+    pickWinner(userRoundId: $userRoundId) {
+      id
+    }
+  }
+`;
+
 export const PLAY_CARDS = gql`
   mutation PlayCards($userCardIds: [Int!]!) {
     playCards(userCardIds: $userCardIds) {
@@ -104,6 +112,9 @@ export const GAME = gql`
             text
           }
           winner
+        }
+        winner {
+          id
         }
       }
       hand {
