@@ -4,11 +4,10 @@ import { START_GAME } from "../../apollo";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Tooltip from "@material-ui/core/Tooltip";
 
-function StartGameButton() {
+function StartGameButton({ enoughPlayers }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -23,7 +22,7 @@ function StartGameButton() {
     onCompleted() {
       handleClose();
     },
-    refetchQueries: ["Game"]
+    refetchQueries: ["Game"],
   });
 
   const submit = () => {
@@ -32,9 +31,18 @@ function StartGameButton() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Start Game
-      </Button>
+      <Tooltip title="Not enough players">
+        <div>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleClickOpen}
+            disabled={!enoughPlayers}
+          >
+            Start Game
+          </Button>
+        </div>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={handleClose}

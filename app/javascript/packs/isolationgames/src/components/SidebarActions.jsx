@@ -8,8 +8,8 @@ function SidebarActions({ isOwner, status, enoughPlayers }) {
   return (
     <div className="sidebar-actions">
       <ListItem className="sidebar-item">
-        {isOwner && status == "created" && enoughPlayers ? (
-          <StartGameButton />
+        {isOwner && status == "created" ? (
+          <StartGameButton enoughPlayers={enoughPlayers} />
         ) : null}
       </ListItem>
       <ListItem className="sidebar-item">
