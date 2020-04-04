@@ -4,18 +4,20 @@ import About from "./About";
 import JoinGame from "./JoinGame";
 import Home from "./Home";
 import HowToPlay from "./HowToPlay";
+import NotFound from "./NotFound";
 
 function Routes() {
   return (
     <Switch>
-      <Route path="/about">
+      <Route exact path="/about">
         <About />
       </Route>
-      <Route path="/how-to-play">
+      <Route exact path="/how-to-play">
         <HowToPlay />
       </Route>
-      <Route path="/join/:name" component={JoinGame} />
-      <Route path="/" width="100%" component={Home} />
+      <Route exact path="/join/:name" component={JoinGame} />
+      <Route exact path="/" width="100%" component={Home} />
+      <Route component={NotFound} />
     </Switch>
   );
 }
