@@ -11,7 +11,7 @@ function Card({ text, cardType, disabled, onClick, isWinner }) {
   };
 
   const clickAction = () => {
-    return disabled ? null : handleClick;
+    disabled ? null : handleClick();
   };
 
   const handleClick = () => {
