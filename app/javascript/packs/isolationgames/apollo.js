@@ -70,6 +70,14 @@ export const PLAY_CARDS = gql`
   }
 `;
 
+export const NEW_ROUND = gql`
+  mutation NewRound {
+    newRound {
+      id
+    }
+  }
+`;
+
 export const UPDATE_USER_NAME = gql`
   mutation UpdateUserName($name: String!) {
     updateUserName(name: $name) {
