@@ -74,7 +74,7 @@ class GameRound < ApplicationRecord
   # work forward by join order,
   # then start again at the beginning
   def set_user
-    user_games = game.user_games.order(id: :asc)
+    user_games = game.user_games.joined.order(id: :asc)
 
     self.user = user_games[(round % user_games.count) - 1].user
   end
