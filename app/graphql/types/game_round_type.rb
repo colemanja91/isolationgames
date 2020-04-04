@@ -28,7 +28,7 @@ class Types::GameRoundType < Types::BaseObject
   end
 
   def user_rounds
-    return game_round.user_rounds if game_round.submitted?
+    return game_round.user_rounds.order(:id) if game_round.submitted?
 
     []
   end
