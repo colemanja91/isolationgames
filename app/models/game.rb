@@ -69,7 +69,7 @@ class Game < ApplicationRecord
   private
 
   def set_name
-    self.name = Haikunator.haikunate
+    self.name = "#{Haikunator.haikunate(0)}-#{Time.now.to_i}"
   end
 
   def only_one_active_per_user
