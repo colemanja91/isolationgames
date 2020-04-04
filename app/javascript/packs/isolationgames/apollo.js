@@ -137,6 +137,7 @@ export const GAME = gql`
         isOwner
         status
         userDisplayName
+        wonRounds
       }
       startedAt
       status

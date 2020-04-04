@@ -41,6 +41,10 @@ class UserGame < ApplicationRecord
     user_cards.available
   end
 
+  def won_rounds
+    user_rounds.winner.count
+  end
+
   def play_cards(user_card_ids)
     if game.current_round.submitted?
       raise StandardError, 'Cannot play cards after round is submitted'

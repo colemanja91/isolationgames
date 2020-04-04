@@ -7,6 +7,7 @@ class Types::UserGameType < Types::BaseObject
   field :is_owner, Boolean, null: false
   field :user_display_name, String, null: false
   field :status, Types::UserGameStatusEnum, null: false
+  field :won_rounds, Integer, null: false
 
   def user_game
     @object

@@ -14,6 +14,10 @@ function Hand({ hand, pick }) {
     }
   }
 
+  const cardClickDisabled = () => {
+    selectedCards.length < pick ? false : true;
+  };
+
   return (
     <Fragment>
       <Grid container direction="column" alignItems="center">
@@ -28,6 +32,7 @@ function Hand({ hand, pick }) {
               text={card.text}
               cardType="white-card"
               onClick={() => handleCardClick(card)}
+              disabled={cardClickDisabled()}
             />
           </Grid>
         ))}
