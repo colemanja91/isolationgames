@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Chip from "@material-ui/core/Chip";
+import Slide from "@material-ui/core/Slide";
 import "../../assets/stylesheets/components/Card.scss";
 
 function Card({ text, cardType, disabled, onClick, isWinner }) {
@@ -23,12 +23,14 @@ function Card({ text, cardType, disabled, onClick, isWinner }) {
   };
 
   return (
-    <div
-      className={cardType}
-      dangerouslySetInnerHTML={{ __html: text }}
-      style={{ border: getBorder() }}
-      onClick={clickAction}
-    ></div>
+    <Slide direction="up" in={true} timeout={750} mountOnEnter unmountOnExit>
+      <div
+        className={cardType}
+        dangerouslySetInnerHTML={{ __html: text }}
+        style={{ border: getBorder() }}
+        onClick={clickAction}
+      ></div>
+    </Slide>
   );
 }
 
