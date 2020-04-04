@@ -20,7 +20,7 @@ class UserCard < ApplicationRecord
     state :played
 
     event :play do
-      transitions from: :available, to: :played, after: :play_card!
+      transitions from: :available, to: :played
     end
   end
 
