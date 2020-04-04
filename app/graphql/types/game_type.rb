@@ -34,6 +34,6 @@ class Types::GameType < Types::BaseObject
   end
 
   def hand
-    current_user.user_games.find_by(game: game).hand
+    current_user.current_game.hand
   end
 end
