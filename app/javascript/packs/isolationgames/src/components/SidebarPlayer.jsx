@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
+import Slide from "@material-ui/core/Slide";
 
 function SidebarPlayer({ player }) {
   const wonRoundsChipText = () => {
@@ -29,12 +30,16 @@ function SidebarPlayer({ player }) {
   };
 
   return (
-    <ListItem className="sidebar-item">
-      <div className="sidebar-player-item">
-        <Typography color={playerColor()}>{player.userDisplayName}</Typography>
-        {chips()}
-      </div>
-    </ListItem>
+    <Slide direction="right" in={true} timeout={250} mountOnEnter unmountOnExit>
+      <ListItem className="sidebar-item">
+        <div className="sidebar-player-item">
+          <Typography color={playerColor()}>
+            {player.userDisplayName}
+          </Typography>
+          {chips()}
+        </div>
+      </ListItem>
+    </Slide>
   );
 }
 
