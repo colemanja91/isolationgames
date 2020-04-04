@@ -9,8 +9,8 @@ function Hand({ hand, pick }) {
   function handleCardClick(card) {
     {
       selectedCards.includes(card)
-        ? setSelectedCards(selectedCards.filter(x => x.id != card.id))
-        : setSelectedCards(selectedCards => [...selectedCards, card]);
+        ? setSelectedCards(selectedCards.filter((x) => x.id != card.id))
+        : setSelectedCards((selectedCards) => [...selectedCards, card]);
     }
   }
 
@@ -22,10 +22,9 @@ function Hand({ hand, pick }) {
         </Grid>
       </Grid>
       <Grid container direction="row" alignItems="flex-start">
-        {hand.map(card => (
+        {hand.map((card) => (
           <Grid item key={`white-card-${card.id}`}>
             <Card
-              cardId={card.id}
               text={card.text}
               cardType="white-card"
               onClick={() => handleCardClick(card)}
