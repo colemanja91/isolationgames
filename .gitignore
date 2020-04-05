@@ -31,6 +31,8 @@
 
 /config/credentials/test.key
 
+/script/setenv
+
 /public/packs
 /public/packs-test
 /node_modules
