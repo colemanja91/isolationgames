@@ -1,5 +1,5 @@
 defaults: &defaults
-  adapter:  postgis
+  adapter: postgis
   encoding: unicode
   template: template0
 
@@ -15,7 +15,7 @@ test:
 
 auroradefaults: &auroradefaults
   <<: *defaults
-  sslmode: verify
+  sslmode: verify-ca
 
 production:
   <<: *auroradefaults

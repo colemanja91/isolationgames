@@ -1,11 +1,13 @@
-require 'cognito_jwt_keys'
-require 'cognito_urls'
+# frozen_string_literal: true
 
-if Rails.env.production?
-  CognitoUrls.init(
-    Rails.application.credentials.cognito[:domain] || 'localhost',
-    Rails.application.credentials.cognito[:region] || 'us-west-2'
-  )
+# require 'cognito_jwt_keys'
+# require 'cognito_urls'
 
-  CognitoJwtKeysProvider.init
-end
+# if Rails.env.production?
+#   CognitoUrls.init(
+#     Rails.application.credentials.cognito[:domain] || 'localhost',
+#     Rails.application.credentials.cognito[:region] || 'us-west-2'
+#   )
+
+#   CognitoJwtKeysProvider.init
+# end
