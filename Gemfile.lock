@@ -71,6 +71,10 @@ GEM
     ast (2.4.0)
     aws-eventstream (1.0.3)
     aws-partitions (1.207.0)
+    aws-rails-provisioner (0.0.1.rc2)
+      aws-sdk-rds (~> 1)
+      aws-sdk-secretsmanager (~> 1)
+      mustache (~> 1)
     aws-sdk-core (3.65.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
@@ -79,9 +83,15 @@ GEM
     aws-sdk-kms (1.24.0)
       aws-sdk-core (~> 3, >= 3.61.1)
       aws-sigv4 (~> 1.1)
+    aws-sdk-rds (1.68.0)
+      aws-sdk-core (~> 3, >= 3.61.1)
+      aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.48.0)
       aws-sdk-core (~> 3, >= 3.61.1)
       aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-secretsmanager (1.31.0)
+      aws-sdk-core (~> 3, >= 3.61.1)
       aws-sigv4 (~> 1.1)
     aws-sdk-sns (1.19.0)
       aws-sdk-core (~> 3, >= 3.61.1)
@@ -163,6 +173,7 @@ GEM
     minitest (5.14.0)
     msgpack (1.3.3)
     multi_json (1.14.1)
+    mustache (1.1.1)
     nenv (0.3.0)
     nio4r (2.5.2)
     nokogiri (1.10.9)
@@ -302,6 +313,7 @@ DEPENDENCIES
   aasm
   activerecord-postgis-adapter
   activerecord-session_store
+  aws-rails-provisioner
   aws-sdk-s3
   aws-sdk-sns
   bootsnap (>= 1.4.2)
