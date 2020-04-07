@@ -39,7 +39,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'aws-rails-provisioner'
   gem 'graphiql-rails'
   gem 'guard-rspec'
   gem 'listen', '>= 3.0.5', '< 3.2'
