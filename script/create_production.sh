@@ -2,4 +2,6 @@
 
 eb create isolationgames-production \
   --instance-types m5.large \
-  --single
+  --min-instances 1 \
+  --max-instances 2 \
+  --elb-type application 
