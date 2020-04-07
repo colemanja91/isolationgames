@@ -2,4 +2,4 @@
 
 eb create isolationgame-production \
   --instance-types m5.large \
-  -- single
+  --single
