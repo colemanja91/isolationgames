@@ -1,5 +1,5 @@
 #!/bin/bash
 
-eb create isolationgame-production \
+eb create isolationgames-production \
   --instance-types m5.large \
   --single
