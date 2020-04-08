@@ -12,7 +12,7 @@ class AuthController < ActionController::Base
 
     @resp = auth_code(params[:code])
     Rails.logger.info(resp)
-    redirect_to '/' && return unless resp
+    head :unauthorized && return unless resp
 
     session[:current_user_id] = user.id
 
@@ -35,6 +35,6 @@ class AuthController < ActionController::Base
   end
 
   def auth_code(code)
-    cognito_client.get_pool_tokens(code)
+    CognitoClient.new.get_pool_tokens(code)
   end
 end
