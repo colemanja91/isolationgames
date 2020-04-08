@@ -31,9 +31,11 @@ class CognitoClient
     #   return nil
     # end
 
+    Rails.logger.info(resp)
+
     resp
 
-    # CognitoPoolTokens.new(CognitoJwtKeysProvider.keys, JSON.parse(resp.body))
+    CognitoPoolTokens.new(CognitoJwtKeysProvider.keys, JSON.parse(resp.body))
   end
 
   # From: https://medium.com/tensult/how-to-refresh-aws-cognito-user-pool-tokens-d0e025cedd52

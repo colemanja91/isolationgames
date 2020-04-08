@@ -10,7 +10,7 @@ class AuthController < ActionController::Base
     Rails.logger.info(params)
     render nothing: true, status: :bad_request && return unless params[:code]
 
-    # @resp = auth_code(params[:code])
+    @resp = auth_code(params[:code])
     Rails.logger.info(resp)
     render nothing: true, status: :unauthorized && return unless resp
 
