@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
+require 'cognito_jwt_keys'
+require 'cognito_client'
+
 class AuthController < ActionController::Base
   attr_reader :resp
 
   def signin
+    Rails.logger.info(params)
     render nothing: true, status: :bad_request && return unless params[:code]
 
     @resp = auth_code(params[:code])
-    Rails.logger.info(params[:code])
     Rails.logger.info(resp)
     redirect_to '/' && return unless resp
 
