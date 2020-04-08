@@ -7,6 +7,8 @@ class AuthController < ActionController::Base
     render nothing: true, status: :bad_request && return unless params[:code]
 
     @resp = auth_code(params[:code])
+    Rails.logger.info(params[:code])
+    Rails.logger.info(resp)
     redirect_to '/' && return unless resp
 
     session[:current_user_id] = user.id

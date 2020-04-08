@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -17,5 +19,8 @@ module Isolationgames
     # the framework and any gems in your application.
 
     ActiveRecord::SessionStore::Session.serializer = :json
+
+    Rails.logger = Logger.new(STDOUT)
+    config.logger = ActiveSupport::Logger.new("log/#{Rails.env}.log")
   end
 end
