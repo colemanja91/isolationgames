@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get '/sign_out', as: 'signout', to: 'sessions#signout'
   get '/sign_up', as: 'signup', to: 'sessions#signup'
 
+  # This is the format required by Cognito
+  get '/oauth2/idpresponse', to: 'auth#signin'
+
   get 'auth/sign_in', to: 'auth#signin'
   get 'auth/sign_out', to: 'auth#signout'
 
