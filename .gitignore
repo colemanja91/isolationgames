@@ -32,7 +32,6 @@
 /config/credentials/test.key
 
 /script/envvars
-/script/setenv
 
 /public/packs
 /public/packs-test

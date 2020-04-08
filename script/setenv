@@ -1,0 +1,3 @@
+#!/bin/bash
+
+eb setenv `paste -d " " -s ./envvars`
