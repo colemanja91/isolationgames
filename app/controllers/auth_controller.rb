@@ -12,11 +12,11 @@ class AuthController < ActionController::Base
 
     @resp = auth_code(params[:code])
     Rails.logger.info(resp)
-    head :unauthorized && return unless resp
+    render nothing: true, status: :unauthorized && return unless resp
 
     session[:current_user_id] = user.id
 
-    redirect_to '/'
+    # redirect_to '/'
   end
 
   def signout
