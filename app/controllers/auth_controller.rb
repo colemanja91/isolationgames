@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AuthController < ApplicationController
+  skip_before_action :check_signed_in
   attr_reader :resp
 
   def signin
