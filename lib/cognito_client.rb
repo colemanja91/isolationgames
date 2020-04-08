@@ -1,6 +1,8 @@
-require "cognito_jwt_keys"
-require "cognito_pool_tokens"
-require "cognito_urls"
+# frozen_string_literal: true
+
+require 'cognito_jwt_keys'
+require 'cognito_pool_tokens'
+require 'cognito_urls'
 
 class CognitoClient
   def initialize(params = {})
@@ -22,14 +24,16 @@ class CognitoClient
                       user: @client_id,
                       password: @client_secret,
                       body: URI.encode_www_form(params),
-                      headers: { "Content-Type": "application/x-www-form-urlencoded"})
+                      headers: { "Content-Type": 'application/x-www-form-urlencoded' })
 
-    unless resp.status == 200
-      Rails.logger.warn("Invalid code: #{authorization_code}: #{resp.body}")
-      return nil
-    end
+    # unless resp.status == 200
+    #   Rails.logger.warn("Invalid code: #{authorization_code}: #{resp.body}")
+    #   return nil
+    # end
 
-    CognitoPoolTokens.new(CognitoJwtKeysProvider.keys, JSON.parse(resp.body))
+    resp
+
+    # CognitoPoolTokens.new(CognitoJwtKeysProvider.keys, JSON.parse(resp.body))
   end
 
   # From: https://medium.com/tensult/how-to-refresh-aws-cognito-user-pool-tokens-d0e025cedd52
@@ -44,8 +48,8 @@ class CognitoClient
     }
 
     hdrs = {
-      "X-Amz-Target": "AWSCognitoIdentityProviderService.InitiateAuth",
-      "Content-Type": "application/x-amz-json-1.1"
+      "X-Amz-Target": 'AWSCognitoIdentityProviderService.InitiateAuth',
+      "Content-Type": 'application/x-amz-json-1.1'
     }
 
     resp = Excon.post(CognitoUrls.refresh_token_uri,
