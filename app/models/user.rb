@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :games
 
   validates :email, presence: true, uniqueness: true
+  validates :uid, presence: true
 
   def self.from_google(email:, uid:, avatar_url:)
     create_with(uid: uid, avatar_url: avatar_url).find_or_create_by!(email: email)

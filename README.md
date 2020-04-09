@@ -28,6 +28,12 @@ Need to set up the following:
 
 ## Testing locally
 
+Be sure to enable caching for OAuth to work:
+
+```
+rails dev:cache
+```
+
 There are a bunch of rake tasks to simulate actions from other users.
 
 To see them, run `rake --tasks`, and look for `rake game:....`.

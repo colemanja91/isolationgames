@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :verify_authenticity_token
+
   def google_oauth2
     user = User.from_google(from_google_params)
 
-    if user.present?
-      sign_out_all_scopes
-      flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
-      sign_in_and_redirect user, event: :authentication
+    if user
+      sign_in_and_redirect user
     else
-      flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
+      Rails.logger.info 'user is NOT present'
       redirect_to new_user_session_path
     end
   end

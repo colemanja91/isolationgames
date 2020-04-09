@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GraphqlController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -7,8 +9,9 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     result = IsolationgamesSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
-  rescue => e
+  rescue StandardError => e
     raise e unless Rails.env.development?
+
     handle_error_in_development e
   end
 
@@ -16,7 +19,7 @@ class GraphqlController < ApplicationController
 
   def context
     {
-      current_user: @current_user
+      current_user: current_user
     }
   end
 
