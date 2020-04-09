@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  def destroy_and_leave
+    current_user.current_game.leave!
+    destroy
+  end
+
   def after_sign_out_path_for(_resource_or_scope)
     new_user_session_path
   end
