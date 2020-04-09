@@ -4,4 +4,4 @@
 
 eb deploy
 
-.script/cleanup
+./script/cleanup

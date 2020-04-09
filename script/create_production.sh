@@ -9,4 +9,4 @@ eb create isolationgames-production \
   --max-instances 4 \
   --envvars `paste -d, -s ./script/envvars`
 
-.script/cleanup
+./script/cleanup
