@@ -4,9 +4,19 @@
     <title>Isolation Games</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <style>
+        .flash__alert   { color: red; }
+        .flash__notice  { color: blue; }
+        .flash__success { color: green; }
+    </style>
   </head>
 
   <body>
+  <% if flash.any? %>
+      <% flash.each do |key, value| -%>
+        <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+      <% end -%>
+    <% end %>
   <div id="app" style="width: 100%; height: 100%"></div>
     <%= yield %>
   </body>
