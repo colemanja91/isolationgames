@@ -2,5 +2,4 @@
 
 bundle install
 yarn install
-nvm use v12.16.1
 RAILS_ENV=production NODE_ENV=production rails assets:precompile
