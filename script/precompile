@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bundle install
+yarn install
+RAILS_ENV=production NODE_ENV=production rails assets:precompile
