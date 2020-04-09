@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     services:
       postgres:
@@ -70,7 +72,6 @@ jobs:
 
       - name: Run RSpec
         env:
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           CI: "true"
         run: |
           bundle exec rspec --format RspecJunitFormatter \
