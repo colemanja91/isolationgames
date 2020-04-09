@@ -2,6 +2,6 @@
 
 ./script/precompile
 
-eb deploy
+eb deploy --staged
 
 ./script/cleanup
