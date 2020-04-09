@@ -1,5 +1,3 @@
 #!/bin/bash
 
-rm -r ./public/assets/
-rm -r ./public/packs/
 git reset --hard
