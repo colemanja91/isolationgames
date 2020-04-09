@@ -24,6 +24,8 @@ gem 'pg'
 gem 'puma', '~> 4.1'
 gem 'react-rails'
 gem 'redis'
+gem 'sass-rails'
+gem 'sprockets'
 gem 'webpacker'
 
 # Reduces boot times through caching; required in config/boot.rb
