@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'cognito_jwt_keys'
-require 'cognito_client'
-
 class ApplicationController < ActionController::Base
   before_action :check_signed_in
 
