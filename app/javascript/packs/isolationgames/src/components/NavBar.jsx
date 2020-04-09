@@ -30,6 +30,11 @@ function NavBar() {
             About
           </Link>
         </Typography>
+        <Typography variant="h6" className="title">
+          <Link href="/users/sign_out" color="textPrimary">
+            Sign Out
+          </Link>
+        </Typography>
       </Toolbar>
     </AppBar>
   );

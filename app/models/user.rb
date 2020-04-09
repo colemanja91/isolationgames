@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
+
   has_many :user_games
   has_many :joined_games, through: :user_games, class_name: 'Game', source: :game
   has_many :games
 
   validates :email, presence: true, uniqueness: true
+  validates :uid, presence: true
+
+  def self.from_google(email:, uid:, avatar_url:)
+    create_with(uid: uid, avatar_url: avatar_url).find_or_create_by!(email: email)
+  end
 
   def self.local_account
     find_or_create_by!(
