@@ -1,18 +1,15 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :cognito_sessions
   has_many :user_games
   has_many :joined_games, through: :user_games, class_name: 'Game', source: :game
   has_many :games
 
-  validates :subscriber, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
   def self.local_account
     find_or_create_by!(
-      email: 'webmaster@isolation.games',
-      subscriber: 'local'
+      email: 'webmaster@isolation.games'
     )
   end
 

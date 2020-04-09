@@ -28,11 +28,6 @@ Need to set up the following:
 
 ## Testing locally
 
-Because we're using AWS Cognito for user account management, when testing
-locally we only have one auto-generated user account (`User.local_account`).
-
-This can make it hard to play a game when testing.
-
 There are a bunch of rake tasks to simulate actions from other users.
 
 To see them, run `rake --tasks`, and look for `rake game:....`.

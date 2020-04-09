@@ -8,7 +8,7 @@ end
 namespace :game do
   desc 'Create a new game not owned by local user'
   task new_game: :environment do
-    user = User.create!(email: Faker::Internet.unique.email, subscriber: Faker::Alphanumeric.alpha(number: 10))
+    user = User.create!(email: Faker::Internet.unique.email)
 
     mutation = <<~GQL
       mutation {
@@ -26,7 +26,7 @@ namespace :game do
   desc 'Create a new user and join them to the current game'
   task new_player: :environment do
     current_game = User.local_account.current_game.game
-    user = User.create!(email: Faker::Internet.unique.email, subscriber: Faker::Alphanumeric.alpha(number: 10))
+    user = User.create!(email: Faker::Internet.unique.email)
     user.join_game!(current_game)
   end
 
