@@ -13,11 +13,7 @@ test:
   url: "postgresql://postgres@localhost:5434/isolationgames_test"
   pool: 5
 
-auroradefaults: &auroradefaults
-  <<: *defaults
-  sslmode: require
-
 production:
-  <<: *auroradefaults
-  url: <%= ENV["PRIMARY_URL"] %>
+  <<: *defaults
+  url: <%= ENV["DATABASE_URL"] %>
   pool: 105
