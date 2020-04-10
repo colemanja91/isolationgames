@@ -74,8 +74,8 @@ function About() {
       <ul>
         <li>Backend: Ruby on Rails</li>
         <li>API: GraphQL</li>
-        <li>Frontend: React</li>
-        <li>Deployment: AWS Elastic Beanstalk + Aurora PostgreSQL</li>
+        <li>Frontend: React + Material UI</li>
+        <li>Deployed on Heroku</li>
         <li>
           Contributing: if you want to contribute to this project, I always
           welcome assistance on making the front-end better. Legally, I cannot
