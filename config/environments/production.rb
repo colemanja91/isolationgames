@@ -2,11 +2,7 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
-  config.assets.digest = true
-  config.assets.enabled = true
   config.assets.compile = false
-  config.assets.prefix = '/production/assets'
 
   config.react.variant = :production
 
