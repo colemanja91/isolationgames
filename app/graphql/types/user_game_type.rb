@@ -8,6 +8,7 @@ class Types::UserGameType < Types::BaseObject
   field :user_display_name, String, null: false
   field :status, Types::UserGameStatusEnum, null: false
   field :won_rounds, Integer, null: false
+  field :avatar_url, String, null: true
 
   def user_game
     @object
@@ -15,6 +16,10 @@ class Types::UserGameType < Types::BaseObject
 
   def has_played
     user_game.user_rounds.where(game_round: user_game.game.current_round).any?
+  end
+
+  def avatar_url
+    user_game.user.avatar_url
   end
 
   def is_judge
