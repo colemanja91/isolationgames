@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   end
 
   # We're using www in Heroku, need to make sure everything is redirected appropriately
-  constraints subdomain: false, domain: 'isolation.games' do
-    get ':any', to: redirect(subdomain: 'www', path: '/%{any}'), any: /.*/
+  unless Rails.env.development? || Rails.env.test?
+    constraints subdomain: false, domain: 'isolation.games' do
+      get ':any', to: redirect(subdomain: 'www', path: '/%{any}'), any: /.*/
+    end
   end
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
