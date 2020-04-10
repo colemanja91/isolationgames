@@ -23,6 +23,7 @@
     "react-dom": "^16.13.1",
     "react-google-button": "^0.7.1",
     "react-router-dom": "^5.1.2",
+    "react_ujs": "^2.6.1",
     "turbolinks": "^5.2.0",
     "typescript": "^3.8.3"
   },
