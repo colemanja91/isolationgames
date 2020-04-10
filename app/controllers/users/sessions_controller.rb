@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   def destroy_and_leave
-    current_user.current_game.leave!
+    current_user.current_game&.leave!
     destroy
   end
 
