@@ -5,6 +5,11 @@ Rails.application.routes.draw do
     mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
   end
 
+  # We're using www in Heroku, need to make sure everything is redirected appropriately
+  constraints subdomain: false, domain: 'mydomain.com' do
+    get ':any', to: redirect(subdomain: 'www', path: '/%{any}'), any: /.*/
+  end
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   devise_scope :user do
