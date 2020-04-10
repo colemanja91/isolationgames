@@ -21,8 +21,6 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 gem 'react-rails'
-gem 'sass-rails'
-gem 'sprockets'
 gem 'webpacker'
 
 # Reduces boot times through caching; required in config/boot.rb
