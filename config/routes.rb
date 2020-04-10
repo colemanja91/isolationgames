@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   # We're using www in Heroku, need to make sure everything is redirected appropriately
-  constraints subdomain: false, domain: 'mydomain.com' do
+  constraints subdomain: false, domain: 'isolation.games' do
     get ':any', to: redirect(subdomain: 'www', path: '/%{any}'), any: /.*/
   end
 
