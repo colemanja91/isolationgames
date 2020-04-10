@@ -6,7 +6,6 @@ Rails.application.configure do
   config.assets.digest = true
   config.assets.enabled = true
   config.assets.compile = false
-  config.assets.check_precompiled_asset = false
   config.assets.prefix = '/production/assets'
 
   config.react.variant = :production
