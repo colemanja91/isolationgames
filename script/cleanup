@@ -1,4 +1,0 @@
-#!/bin/bash
-
-rm -r ./public/production/assets/
-git reset --hard
