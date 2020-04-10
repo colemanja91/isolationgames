@@ -131,6 +131,7 @@ export const GAME = gql`
       }
       name
       players {
+        avatarUrl
         id
         hasPlayed
         isJudge
