@@ -9,6 +9,8 @@ Rails.application.configure do
   config.assets.check_precompiled_asset = false
   config.assets.prefix = '/production/assets'
 
+  config.react.variant = :production
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
