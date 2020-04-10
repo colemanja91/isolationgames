@@ -263,7 +263,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2,
                   Rails.application.credentials.google&.[](:client_id) || 'client_id',
                   Rails.application.credentials.google&.[](:client_secret) || 'client_secret',
-                  provider_ignores_state: true
+                  provider_ignores_state: Rails.application.development? || Rails.application.test?
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

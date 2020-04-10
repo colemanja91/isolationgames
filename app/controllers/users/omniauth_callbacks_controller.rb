@@ -7,9 +7,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user = User.from_google(from_google_params)
 
     if user
+      Rails.logger.info("Found user for #{from_google_params.email}")
       sign_in_and_redirect user
     else
-      Rails.logger.info 'user is NOT present'
+      Rails.logger.info("User not found for #{from_google_params.email}")
       redirect_to new_user_session_path
     end
   end
