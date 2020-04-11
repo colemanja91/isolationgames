@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Slide from "@material-ui/core/Slide";
-import "../../assets/stylesheets/components/Card.scss";
+import "../styles/Card.scss";
 
 function Card({ text, cardType, disabled, onClick, isWinner }) {
   const [border, setBorder] = useState("3px solid black");

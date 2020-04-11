@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
-import { NEW_GAME } from "../../apollo";
-import "../../assets/stylesheets/components/GameButton.scss";
+import { NEW_GAME } from "./apollo";
+import "../styles/GameButton.scss";
 
 function NewGameButton() {
   const [errors, setErrors] = useState([]);
 
-  const handleFormSubmit = props => {
+  const handleFormSubmit = (props) => {
     let { newGame } = props;
     newGame()
-      .then(response => {
+      .then((response) => {
         alert("New game created! Invite other horrible people to get started.");
         window.location.reload(false);
       })
-      .catch(e => {
+      .catch((e) => {
         // let messages = JSON.parse(e.graphQLErrors[0].message);
         // setErrors(messages.errors);
       });
@@ -23,7 +23,7 @@ function NewGameButton() {
   return (
     <div className="GameButton">
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           handleFormSubmit({ newGame });
         }}

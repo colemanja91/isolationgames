@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useMutation } from "react-apollo";
-import { JOIN_GAME } from "../../apollo";
+import { JOIN_GAME } from "./apollo";
 import GameNotFound from "./GameNotFound";
 
 function JoinGame() {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
+import Tooltip from "@material-ui/core/Tooltip";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import copy from "clipboard-copy";
 
@@ -27,7 +27,7 @@ function GameLink({ name }) {
       <div>
         <Tooltip
           PopperProps={{
-            disablePortal: true
+            disablePortal: true,
           }}
           onClose={handleTooltipClose}
           open={open}

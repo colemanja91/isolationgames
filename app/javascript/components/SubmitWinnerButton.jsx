@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useMutation } from "react-apollo";
-import { PLAY_CARDS } from "../../apollo";
+import { PICK_WINNER } from "./apollo";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -10,7 +10,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Card from "./Card";
 
-function SubmitCardsButton({ selectedCards, pick }) {
+function SubmitWinnerButton({ winner }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -22,31 +22,29 @@ function SubmitCardsButton({ selectedCards, pick }) {
   };
 
   const buttonDisabled = () => {
-    return selectedCards.length == pick ? false : true;
+    return winner ? false : true;
   };
 
   const buttonText = () => {
-    return selectedCards.length == pick
-      ? "SUBMIT"
-      : `PICK (${pick - selectedCards.length} REMAINING)`;
+    return winner ? "SUBMIT" : `PICK 1`;
   };
 
-  const confirmationText = () => {
-    return selectedCards.length == 1
-      ? "Are you sure you want to submit this card?"
-      : "Are you sure you want to submit these cards?";
+  const winnerText = () => {
+    return winner
+      ? winner.userCards.map((x) => x.text).join("<br><br>AND<br><br>")
+      : null;
   };
 
-  const [playCards, { loading, error }] = useMutation(PLAY_CARDS, {
+  const [pickWinner, { loading, error }] = useMutation(PICK_WINNER, {
     onCompleted() {
       handleClose();
     },
-    refetchQueries: ["Game"]
+    refetchQueries: ["Game"],
   });
 
   const submit = () => {
-    playCards({
-      variables: { userCardIds: selectedCards.map(x => x.id) }
+    pickWinner({
+      variables: { userRoundId: winner.id },
     });
   };
 
@@ -67,23 +65,15 @@ function SubmitCardsButton({ selectedCards, pick }) {
         aria-describedby="confirmation-dialog-description"
       >
         <DialogTitle id="confirmation-dialog-title">
-          {"Submit cards"}
+          {"Pick Winner"}
         </DialogTitle>
         <DialogContent>
           <Fragment>
             <DialogContentText id="confirmation-dialog-description">
-              {confirmationText()}
+              Are you <i>sure</i> this is the winner?
             </DialogContentText>
             <Grid container direction="row" alignItems="flex-start">
-              {selectedCards.map(card => (
-                <Grid item key={`white-card-confirmation-${card.id}`}>
-                  <Card
-                    cardId={card.id}
-                    text={card.text}
-                    cardType="white-card"
-                  />
-                </Grid>
-              ))}
+              <Card text={winnerText()} cardType="white-card" />
             </Grid>
           </Fragment>
         </DialogContent>
@@ -100,4 +90,4 @@ function SubmitCardsButton({ selectedCards, pick }) {
   );
 }
 
-export default SubmitCardsButton;
+export default SubmitWinnerButton;

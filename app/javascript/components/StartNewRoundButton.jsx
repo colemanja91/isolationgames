@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation } from "react-apollo";
-import { NEW_ROUND } from "../../apollo";
+import { NEW_ROUND } from "./apollo";
 import Button from "@material-ui/core/Button";
 
 function StartNewRoundButton() {
