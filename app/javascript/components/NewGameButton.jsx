@@ -23,7 +23,6 @@ function NewGameButton() {
   const [newGame] = useMutation(NEW_GAME);
   return (
     <Fragment>
-      <Instructions />
       <div className="GameButton">
         <form
           onSubmit={(e) => {
@@ -34,6 +33,7 @@ function NewGameButton() {
           <button type="submit">Start a new game.</button>
         </form>
       </div>
+      <Instructions />
     </Fragment>
   );
 }
