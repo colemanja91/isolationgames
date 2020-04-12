@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { useMutation } from "react-apollo";
 import { NEW_GAME } from "./apollo";
+import Instructions from "./Instructions";
 import "../styles/GameButton.scss";
 
 function NewGameButton() {
@@ -21,16 +22,19 @@ function NewGameButton() {
 
   const [newGame] = useMutation(NEW_GAME);
   return (
-    <div className="GameButton">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleFormSubmit({ newGame });
-        }}
-      >
-        <button type="submit">Start a new game.</button>
-      </form>
-    </div>
+    <Fragment>
+      <div className="GameButton">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleFormSubmit({ newGame });
+          }}
+        >
+          <button type="submit">Start a new game.</button>
+        </form>
+      </div>
+      <Instructions />
+    </Fragment>
   );
 }
 
