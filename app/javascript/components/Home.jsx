@@ -1,10 +1,10 @@
 import React from "react";
 import { useQuery } from "react-apollo";
-import { GAME, USER } from "../../apollo";
+import { GAME, USER } from "./apollo";
 import Game from "./Game";
 import NewGameButton from "./NewGameButton";
-import "../../assets/stylesheets/components/Home.scss";
-import "../../assets/stylesheets/components/GameButton.scss";
+import "../styles/Home.scss";
+import "../styles/GameButton.scss";
 
 function Home() {
   const { loading: gameLoading, error: gameError, data: gameData } = useQuery(

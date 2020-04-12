@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
-import { END_GAME } from "../../apollo";
+import { END_GAME } from "./apollo";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -23,7 +23,7 @@ function EndGameButton() {
     onCompleted() {
       handleClose();
       window.location.reload(false);
-    }
+    },
   });
 
   const submit = () => {

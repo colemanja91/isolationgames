@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-import "../../assets/stylesheets/components/NavBar.scss";
+import "../styles/NavBar.scss";
 
 function NavBar() {
   return (

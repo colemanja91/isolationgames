@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
+import React from "react";
 import Link from "@material-ui/core/Link";
 import LaunchIcon from "@material-ui/icons/Launch";
 import AddVideoLinkButton from "./AddVideoLinkButton";

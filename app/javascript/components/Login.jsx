@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+function Login() {
   const classes = useStyles();
 
   return (
@@ -55,3 +55,5 @@ export default function SignIn() {
     </Container>
   );
 }
+
+export default Login;

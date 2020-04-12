@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import { client } from "./apollo";
-import NavBar from "./src/components/NavBar";
-import Routes from "./src/components/Routes";
-import "./assets/stylesheets/App.scss";
+import NavBar from "./NavBar";
+import Routes from "./Routes";
+import "../styles/App.scss";
 
 function App() {
   return (
@@ -24,3 +24,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#app")
   );
 });
+
+export default App;

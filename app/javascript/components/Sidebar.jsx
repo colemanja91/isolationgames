@@ -6,7 +6,7 @@ import SidebarActions from "./SidebarActions";
 import SidebarPlayerList from "./SidebarPlayerList";
 import SidebarUser from "./SidebarUser";
 import VideoLink from "./VideoLink";
-import "../../assets/stylesheets/components/Sidebar.scss";
+import "../styles/Sidebar.scss";
 
 function Sidebar({ game, user }) {
   const { enoughPlayers, isOwner, status, videoLink } = game;

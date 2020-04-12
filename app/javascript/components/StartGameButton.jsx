@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
-import { LEAVE_GAME } from "../../apollo";
+import { START_GAME } from "./apollo";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Tooltip from "@material-ui/core/Tooltip";
 
-function LeaveGameButton() {
+function StartGameButton({ enoughPlayers }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -19,41 +18,44 @@ function LeaveGameButton() {
     setOpen(false);
   };
 
-  const [leaveGame, { loading, error }] = useMutation(LEAVE_GAME, {
+  const [startGame, { loading, error }] = useMutation(START_GAME, {
     onCompleted() {
       handleClose();
-      window.location.reload(false);
-    }
+    },
+    refetchQueries: ["Game"],
   });
 
   const submit = () => {
-    leaveGame();
+    startGame();
   };
 
   return (
     <div>
-      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-        Leave Game
-      </Button>
+      <Tooltip title="Not enough players">
+        <div>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleClickOpen}
+            disabled={!enoughPlayers}
+          >
+            Start Game
+          </Button>
+        </div>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Leave game?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            If you leave the game and there are no longer enough players, the
-            game will end.
-          </DialogContentText>
-        </DialogContent>
+        <DialogTitle id="alert-dialog-title">{"Start game?"}</DialogTitle>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Nevermind
+            Not yet.
           </Button>
           <Button onClick={submit} color="primary" autoFocus>
-            Yes, leave
+            Yes.
           </Button>
         </DialogActions>
       </Dialog>
@@ -61,4 +63,4 @@ function LeaveGameButton() {
   );
 }
 
-export default LeaveGameButton;
+export default StartGameButton;

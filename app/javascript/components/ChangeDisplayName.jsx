@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
-import { UPDATE_USER_NAME } from "../../apollo";
+import { UPDATE_USER_NAME } from "./apollo";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,7 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import "../../assets/stylesheets/components/ChangeDisplayName.scss";
+import "../styles/ChangeDisplayName.scss";
 
 export default function ChangeDisplayName({ user }) {
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function ChangeDisplayName({ user }) {
     setOpen(false);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setName(e.target.value);
   };
 
@@ -30,12 +30,12 @@ export default function ChangeDisplayName({ user }) {
     onCompleted() {
       handleClose();
     },
-    refetchQueries: ["Game", "User"]
+    refetchQueries: ["Game", "User"],
   });
 
   const submit = () => {
     updateName({
-      variables: { name }
+      variables: { name },
     });
   };
 

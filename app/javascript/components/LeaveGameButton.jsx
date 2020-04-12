@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
-import { START_GAME } from "../../apollo";
+import { LEAVE_GAME } from "./apollo";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Tooltip from "@material-ui/core/Tooltip";
 
-function StartGameButton({ enoughPlayers }) {
+function LeaveGameButton() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -18,44 +19,41 @@ function StartGameButton({ enoughPlayers }) {
     setOpen(false);
   };
 
-  const [startGame, { loading, error }] = useMutation(START_GAME, {
+  const [leaveGame, { loading, error }] = useMutation(LEAVE_GAME, {
     onCompleted() {
       handleClose();
+      window.location.reload(false);
     },
-    refetchQueries: ["Game"],
   });
 
   const submit = () => {
-    startGame();
+    leaveGame();
   };
 
   return (
     <div>
-      <Tooltip title="Not enough players">
-        <div>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={handleClickOpen}
-            disabled={!enoughPlayers}
-          >
-            Start Game
-          </Button>
-        </div>
-      </Tooltip>
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+        Leave Game
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Start game?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Leave game?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            If you leave the game and there are no longer enough players, the
+            game will end.
+          </DialogContentText>
+        </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Not yet.
+            Nevermind
           </Button>
           <Button onClick={submit} color="primary" autoFocus>
-            Yes.
+            Yes, leave
           </Button>
         </DialogActions>
       </Dialog>
@@ -63,4 +61,4 @@ function StartGameButton({ enoughPlayers }) {
   );
 }
 
-export default StartGameButton;
+export default LeaveGameButton;
