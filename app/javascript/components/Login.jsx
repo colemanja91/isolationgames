@@ -2,8 +2,8 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import GoogleButton from "react-google-button";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Instructions from "./Instructions";
 import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
@@ -36,9 +36,7 @@ function Login() {
       <CssBaseline />
       <div className={classes.paper}>
         <img src="/logo.jpg" alt="Isolation Games" width="400" />
-        <Typography variant="subtitle1" align="center">
-          Pass the time while being socially-responsible with social distancing
-        </Typography>
+        <Instructions />
         <br></br>
         <br></br>
         <GoogleButton
