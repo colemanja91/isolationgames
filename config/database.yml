@@ -5,12 +5,12 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  url: "postgresql://postgres@localhost:5434/isolationgames_development"
+  url: "postgresql://postgres@localhost:5432/isolationgames_development"
   pool: 5
 
 test:
   <<: *defaults
-  url: "postgresql://postgres@localhost:5434/isolationgames_test"
+  url: "postgresql://postgres@localhost:5432/isolationgames_test"
   pool: 5
 
 production:
