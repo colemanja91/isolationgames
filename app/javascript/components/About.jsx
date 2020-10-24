@@ -66,7 +66,7 @@ function About() {
         </li>
         <li>
           If you want your information removed from our database,{" "}
-          <a href="mailto:webmaster@isolation.games">contact us.</a>
+          <a href="mailto:colemanja91@gmail.com">contact us.</a>
         </li>
       </ul>
 
