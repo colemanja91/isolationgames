@@ -35,7 +35,7 @@ function About() {
         <li>
           If you find any bugs, or have feature requests, feel free to email me
           at{" "}
-          <a href="mailto:webmaster@isolation.games">
+          <a href="mailto:colemanja91@gmail.com">
             webmaster@isolation.games
           </a>
           . I'll try to fix any bugs that directly impact playability, anything
