@@ -7,6 +7,7 @@ class IsolationgamesSchema < GraphQL::Schema
   use GraphQL::Analysis::AST
   
   # Adding a change that doesn't matter
+  # and another one
 
   # Add built-in connections for pagination
   use GraphQL::Pagination::Connections
