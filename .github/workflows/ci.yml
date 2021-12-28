@@ -51,7 +51,7 @@ jobs:
         run: yarn install
 
       - name: Setup DB
-        run: bin/rails db:drop db:create db:schema:load --trace
+        run: bundle exec rails db:drop db:create db:schema:load --trace
 
       - name: Add seed data
         run: bundle exec rake db:seed
