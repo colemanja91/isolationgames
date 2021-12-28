@@ -30,20 +30,13 @@ jobs:
 
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: "12.16.1"
-
-      - name: Cache Gems
-        id: gem-cache
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gem-
 
       - name: Cache NodeJS Modules
         id: node-cache
@@ -53,9 +46,6 @@ jobs:
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-
-      - name: Bundle Install
-        run: bundle install --path vendor/bundle --jobs 4 --retry 3
 
       - name: Yarn Install
         run: yarn install
