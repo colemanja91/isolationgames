@@ -26,26 +26,17 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.6.5
+          bundler-cache: true
 
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: "12.16.1"
-
-      - name: Cache Gems
-        id: gem-cache
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gem-
 
       - name: Cache NodeJS Modules
         id: node-cache
@@ -56,14 +47,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
 
-      - name: Bundle Install
-        run: bundle install --path vendor/bundle --jobs 4 --retry 3
-
       - name: Yarn Install
         run: yarn install
 
       - name: Setup DB
-        run: bin/rails db:drop db:create db:schema:load --trace
+        run: bundle exec rails db:drop db:create db:schema:load --trace
 
       - name: Add seed data
         run: bundle exec rake db:seed
